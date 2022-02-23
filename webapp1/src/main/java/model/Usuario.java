@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.net.URL;
+
 /**
  *
  * @author defie
@@ -19,9 +21,9 @@ public class Usuario {
     private String email;
     private int age;
     private String description;
-    //private String photo;
+    private URL photo;
 
-    public Usuario(int userid, String userName, String realName, String surName, String password, String email, int age, String description) {
+    public Usuario(int userid, String userName, String realName, String surName, String password, String email, int age, String description, URL photo) {
         this.userid = userid;
         this.userName = userName;
         this.realName = realName;
@@ -30,6 +32,7 @@ public class Usuario {
         this.email = email;
         this.age = age;
         this.description = description;
+        this.photo = photo;
     }
     
     public int getUserid() {
@@ -94,6 +97,14 @@ public class Usuario {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public URL getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(URL photo) {
+        this.photo = photo;
     }
     
     

@@ -3,6 +3,40 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
    version="4.0">
+<!-- Servlet mappings -->
+    <servlet>
+        <servlet-name>servletListadoVid</servlet-name> <!-- name -->
+        <servlet-class>controller.servletListadoVid</servlet-class> <!-- package -->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletListadoVid</servlet-name> <!-- same name -->
+        <url-pattern>/servletListadoVid</url-pattern> <!-- url from root / -->
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>servletRegistroVid</servlet-name> <!-- name -->
+        <servlet-class>controller.servletRegistroVid</servlet-class> <!-- package -->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletRegistroVid</servlet-name> <!-- same name -->
+        <url-pattern>/servletRegistroVid</url-pattern> <!-- url from root / -->
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>servletUsuarios</servlet-name> <!-- name -->
+        <servlet-class>controller.servletUsuarios</servlet-class> <!-- package -->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletUsuarios</servlet-name> <!-- same name -->
+        <url-pattern>/servletUsuarios</url-pattern> <!-- url from root / -->
+    </servlet-mapping>
+    
+    <!-- **** -->
+    <welcome-file-list>  
+        <welcome-file>jsp/login.jsp</welcome-file>  
+    </welcome-file-list>
+<!--    <servlet-mapping>
+        <servlet-name>listadoVid</servlet-name>
+        <url-pattern>/servletListadoVid</url-pattern>
+    </servlet-mapping>-->
     <session-config>
         <session-timeout>
             30

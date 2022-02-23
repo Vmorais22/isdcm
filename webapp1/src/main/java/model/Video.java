@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author defie
- */
 public class Video {
     
     private int videoId;
@@ -18,9 +9,9 @@ public class Video {
     private String duration;
     private int views;
     private String description;
-    private int format;
+    private String format;
 
-    public Video(int videoId, String title, String author, String creationDate, String duration, int views, String description, int format) {
+    public Video(int videoId, String title, String author, String creationDate, String duration, int views, String description, String format) {
         this.videoId = videoId;
         this.title = title;
         this.author = author;
@@ -87,13 +78,11 @@ public class Video {
         this.description = description;
     }
 
-    public int getFormat() {
+    public String getFormat() {
         return format;
     }
 
-    public void setFormat(int format) {
+    public void setFormat(String format) {
         this.format = format;
     }
-    
-    
 }
