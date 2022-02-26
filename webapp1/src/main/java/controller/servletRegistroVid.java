@@ -9,8 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Utilities.DBConnection;
 import controller.Exceptions.VideoAlreadyExistsException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,30 +23,8 @@ public class servletRegistroVid extends HttpServlet{
     private static final String INSERT_QUERY = "INSERT INTO VIDEOS "
         + "(videoId, title, author, creationDate, duration, views, description, format) "
         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
    private static final String SELECT_BY_ID = "SELECT * FROM VIDEOS WHERE videoId = ?";
 
-    /**
-     * servlet init without parameters
-     * @throws ServletException
-     */
-    @Override
-    public void init() throws ServletException
-    {
-	
-    }
-    /**
-     * servlet init with parameters
-     * @param conf
-     * @throws ServletException
-     */
-    @Override
-    public void init(ServletConfig conf) throws ServletException
-    {
-	super.init(conf);
-	
-    }   
-    
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -63,10 +42,11 @@ public class servletRegistroVid extends HttpServlet{
         catch(VideoAlreadyExistsException e) 
         {
             
+        } catch (SQLException ex) {
+            Logger.getLogger(servletRegistroVid.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
-                    DBConnection.closeConnection();
                     response.setStatus(HttpServletResponse.SC_OK);
                 } 
                 catch (Exception ex) {
@@ -76,7 +56,8 @@ public class servletRegistroVid extends HttpServlet{
     
      private static boolean exists ( int videoId ) {
         try {
-            PreparedStatement preparedStatement = DBConnection.getPreparedStatement(SELECT_BY_ID);
+            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
+            PreparedStatement preparedStatement = c.prepareStatement(SELECT_BY_ID);
             
             preparedStatement.setInt(1, videoId );
             
@@ -85,14 +66,7 @@ public class servletRegistroVid extends HttpServlet{
         } catch (SQLException ex) {
             System.err.println(ex);
         }
-        finally {
-            try {
-                DBConnection.closeConnection();
-            } 
-            catch (Exception ex) {
-                System.err.println(ex);
-            }
-        }
+      
         return false;
     }
         /*catch (Exception e)
@@ -101,9 +75,11 @@ public class servletRegistroVid extends HttpServlet{
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }*/
 
-    private void createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException {
+    private void createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException, SQLException {
         if(!exists(parseInt(request.getParameter("videoId")))) 
         {
+            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
+            
              Video newVideo = new Video( 
                                 parseInt(request.getParameter("videoId")),
                                 request.getParameter("title"),
@@ -117,7 +93,7 @@ public class servletRegistroVid extends HttpServlet{
                                 //new URL(request.getParameter("image")),
                                 );
             try {
-                PreparedStatement preparedStatement = DBConnection.getPreparedStatement(INSERT_QUERY);
+                PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
 
                 preparedStatement.setInt(1, newVideo.getVideoId());
                 preparedStatement.setString(2, newVideo.getTitle());
