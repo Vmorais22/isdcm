@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Login page</h1>
+        <form action="/webapp1/servletUsuarios" method="post">
+            <input type="text" placeholder="Username" name="user"/>
+            <input type="password" placeholder="Password" name="passwd"/>
+            <input type="submit" value="Enviar"/>            
+        </form>
+        <a href="/webapp1/jsp/registerUsu.jsp">¿No estás registrado?</a>
     </body>
 </html>

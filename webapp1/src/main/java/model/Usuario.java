@@ -5,6 +5,7 @@
  */
 package model;
 
+import controller.Exceptions.UserDontExistsException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,10 +27,9 @@ public class Usuario {
     private int age;
     private String description;
     private URL photo;
-
-    public Usuario() {
-        
-    }
+    
+    public Usuario(){}
+    
     public Usuario(int userid, String userName, String realName, String surName, String password, String email, int age, String description, URL photo) {
         this.userid = userid;
         this.userName = userName;
@@ -114,25 +114,26 @@ public class Usuario {
         this.photo = photo;
     }
 
-    public String queryTest(String user, String passwd) {
-        String result = "El usuario existe";
+    public boolean queryTest(String username, String passwd) {
+        boolean result = true;
         Connection c = null;
         try {
             PreparedStatement statement;
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
-            String query = "select count(*) from usuarios where id_user = ? and password = ?";
+            c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+            String query = "select count(*) from USERS where username = ? and password = ?";
             statement = c.prepareStatement(query);
-            statement.setString(1, user);
-            statement.setString(2, passwd);   
+            statement.setString(1, username);
+            statement.setString(2, passwd);
             ResultSet r = statement.executeQuery();
             if (r.next())
             {
                 if (r.getInt(1) == 0)
-                    result = "El usuario no existe";
+                    result = false;
             }          
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
+            System.out.println("error: "+e);
         } finally {
             try {
                 if (c != null) 
@@ -142,5 +143,42 @@ public class Usuario {
             }
         }
         return result;                        
+    }
+
+    public Object getProfile(String username) {
+        Usuario result = null;
+        Connection c = null;
+        try {
+            System.out.println("1");
+            PreparedStatement statement;
+            System.out.println("2");
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            System.out.println("3");
+            c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+            System.out.println("4");String query = "select * from USERS where username = ?";
+            System.out.println("5");statement = c.prepareStatement(query);
+            System.out.println("6");statement.setString(1, username);
+            System.out.println("7");ResultSet r = statement.executeQuery();
+            System.out.println("8");
+            if (r.next())
+            {
+                if (r.getInt(1) == 0)
+                    throw new UserDontExistsException();
+            }
+            System.out.println("9");
+            result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"),r.getURL("photo"));
+            System.out.println("10");
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            System.out.println("error: "+e);
+        } finally {
+            try {
+                if (c != null) 
+                    c.close();                
+            } catch (Exception e) {
+                System.out.println(e.getStackTrace());
+            }
+        }
+        return result;
     }
 }

@@ -49,15 +49,20 @@ public class servletUsuarios extends HttpServlet {
         {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             System.err.println("Unexpected error ocurred: " + e);
-        }*/
-       
+        }*/                
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String user = request.getParameter("user");
+            String username = request.getParameter("user");
             String passwd = request.getParameter("passwd");
             
-            String result = new Usuario().queryTest(user, passwd);                        
+            boolean result = new Usuario().queryTest(username, passwd);
+            
+            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEE: " + request.getContextPath() + "/profileUsu.jsp");
+            if (result) response.sendRedirect("/webapp1/jsp/profileUsu.jsp");//request.getContextPath());//) + "/login.jsp");
+            else response.sendRedirect(request.getContextPath());    
+            
+            System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRR: "+ result);
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");

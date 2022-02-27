@@ -8,21 +8,40 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Usuario;
 
-@WebServlet(name = "servletListadoVid", urlPatterns = {"/servletListadoVid"})
+@WebServlet(name = "servletProfileUsu", urlPatterns = {"/servletProfileUsu"})
 public class servletProfileUsu extends HttpServlet {
 
    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        System.out.println("doGet servletProfileUsu");
+        try (PrintWriter out = response.getWriter()) {
+            
+            String username = request.getParameter("user");
+            
+            request.setAttribute("dataProfile", new Usuario().getProfile(username));
+        }
+        
+        /*
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {    
                 out.println("<html><body>Method not supported</body></html>");
-        }
+        }*/
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // ... codigo para una peticion POST
+        //response.sendRedirect(request.getContextPath() + "/profileUsu.jsp");
+        System.out.println("doPost servletProfileUsu");
+        
+        try (PrintWriter out = response.getWriter()) {
+            
+            String username = request.getParameter("user");
+            
+            request.setAttribute("dataProfile", new Usuario().getProfile(username));
+        }
     }
 }
