@@ -56,9 +56,9 @@ public class servletRegistroVid extends HttpServlet {
         return preparedStatement.executeQuery().next();
     }
 
-    private void createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException, SQLException {
+    private void createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException, SQLException, ClassNotFoundException {
         if (!exists(parseInt(request.getParameter("videoId")))) {
-            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
+            
 
             Video newVideo = new Video(
                     parseInt(request.getParameter("videoId")),
@@ -72,7 +72,9 @@ public class servletRegistroVid extends HttpServlet {
             //new URL(request.getParameter("url")),
             //new URL(request.getParameter("image")),
             );
-           
+            
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
             PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
             preparedStatement.setInt(1, newVideo.getVideoId());
             preparedStatement.setString(2, newVideo.getTitle());

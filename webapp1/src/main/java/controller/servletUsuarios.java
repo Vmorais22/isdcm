@@ -36,7 +36,8 @@ public class servletUsuarios extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
+       /* try {
+            
             createNewUser(request);
             response.setStatus(HttpServletResponse.SC_OK);
         } 
@@ -48,6 +49,25 @@ public class servletUsuarios extends HttpServlet {
         {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             System.err.println("Unexpected error ocurred: " + e);
+        }*/
+       
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            
+            String user = request.getParameter("user");
+            String passwd = request.getParameter("passwd");
+            
+            String result = new Usuario().queryTest(user, passwd);                        
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet servletEjemplo</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1> " + result + " </h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -58,7 +78,7 @@ public class servletUsuarios extends HttpServlet {
         return preparedStatement.executeQuery().next();
     }
     
-    private void createNewUser(HttpServletRequest request) throws UserAlreadyExistsException, MalformedURLException, SQLException {
+    private void createNewUser(HttpServletRequest request) throws UserAlreadyExistsException, MalformedURLException, SQLException, ClassNotFoundException {
         if (!exists(parseInt(request.getParameter("userId")))) {
             Usuario newUser = new Usuario(
                     parseInt(request.getParameter("userId")),
@@ -71,6 +91,9 @@ public class servletUsuarios extends HttpServlet {
                     request.getParameter("description"),
                     new URL(request.getParameter("photo"))
             );
+            
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
             PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
             preparedStatement.setInt(1, newUser.getUserid());
