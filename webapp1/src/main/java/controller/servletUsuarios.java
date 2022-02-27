@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.Exceptions.UserAlreadyExistsException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
@@ -25,8 +26,12 @@ public class servletUsuarios extends HttpServlet {
     private static final String SELECT_BY_ID = "SELECT * FROM VIDEOS WHERE userId = ?";
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // ... codigo para una peticion GET
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {    
+                out.println("<html><body>Method not supported</body></html>");
+        }
     }
 
     @Override

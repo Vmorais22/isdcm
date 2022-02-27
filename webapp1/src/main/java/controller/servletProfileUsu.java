@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,31 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "servletListadoVid", urlPatterns = {"/servletListadoVid"})
 public class servletProfileUsu extends HttpServlet {
 
-    /**
-     * servlet init without parameters
-     *
-     * @throws ServletException
-     */
-    @Override
-    public void init() throws ServletException {
-
-    }
-
-    /**
-     * servlet init with parameters
-     *
-     * @param conf
-     * @throws ServletException
-     */
-    @Override
-    public void init(ServletConfig conf) throws ServletException {
-        super.init(conf);
-
-    }
-
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // ... codigo para una peticion GET
+   @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {    
+                out.println("<html><body>Method not supported</body></html>");
+        }
     }
 
     @Override

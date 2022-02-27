@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.Exceptions.VideoAlreadyExistsException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,8 +24,12 @@ public class servletRegistroVid extends HttpServlet {
     private static final String SELECT_BY_ID = "SELECT * FROM VIDEOS WHERE videoId = ?";
 
    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // ... codigo para una peticion GET
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {    
+                out.println("<html><body>Method not supported</body></html>");
+        }
     }
 
     @Override
