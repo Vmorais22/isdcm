@@ -1,7 +1,7 @@
 package model;
 
 public class Video {
-    
+
     private int videoId;
     private String title;
     private String author;

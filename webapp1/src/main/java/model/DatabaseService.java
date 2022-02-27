@@ -10,5 +10,5 @@ package model;
  * @author defie
  */
 public class DatabaseService {
-    
+
 }

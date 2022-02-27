@@ -10,37 +10,35 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "servletListadoVid", urlPatterns = {"/servletListadoVid"})
 public class servletListadoVid extends HttpServlet {
-    
+
     /**
      * servlet init without parameters
+     *
      * @throws ServletException
      */
     @Override
-    public void init() throws ServletException
-    {
-	
+    public void init() throws ServletException {
+
     }
+
     /**
      * servlet init with parameters
+     *
      * @param conf
      * @throws ServletException
      */
     @Override
-    public void init(ServletConfig conf) throws ServletException
-    {
-	super.init(conf);
-    }   
-    
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-            // ... codigo para una peticion GET
+    public void init(ServletConfig conf) throws ServletException {
+        super.init(conf);
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // ... codigo para una peticion GET
+    }
 
-    {
-            // ... codigo para una peticion POST
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // ... codigo para una peticion POST
     }
 }

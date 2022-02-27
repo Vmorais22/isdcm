@@ -34,7 +34,7 @@ public class Usuario {
         this.description = description;
         this.photo = photo;
     }
-    
+
     public int getUserid() {
         return userid;
     }
@@ -98,7 +98,7 @@ public class Usuario {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public URL getPhoto() {
         return photo;
     }
@@ -106,6 +106,5 @@ public class Usuario {
     public void setPhoto(URL photo) {
         this.photo = photo;
     }
-    
-    
+
 }
