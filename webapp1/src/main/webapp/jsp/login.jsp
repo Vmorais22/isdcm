@@ -14,10 +14,12 @@
     <body>
         <h1>Login page</h1>
         <form action="/webapp1/servletUsuarios" method="post">
-            <input type="text" placeholder="Username" name="user"/>
-            <input type="password" placeholder="Password" name="passwd"/>
-            <input type="submit" value="Enviar"/>            
+            <br><input type="text" placeholder="Username" name="username"/></br>
+            <br><input type="password" placeholder="Contraseña" name="passwd"/></br>
+            <br></br>
+            <br><input type="submit" value="Enviar"/></br>           
         </form>
+        <br></br>
         <a href="/webapp1/jsp/registerUsu.jsp">¿No estás registrado?</a>
     </body>
 </html>

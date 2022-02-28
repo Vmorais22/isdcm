@@ -13,5 +13,19 @@
     </head>
     <body>
         <h1>Register page</h1>
+        <form action="/webapp1/servletRegisterVid" method="post">
+            <br><input type="text" placeholder="Username" name="username"/></br>
+            <br><input type="password" placeholder="Contraseña" name="passwd"/></br>
+            <br><input type="password" placeholder="Repita contraseña" name="passwd"/></br>
+            <br><input type="text" placeholder="Nombre" name="realName"/></br>
+            <br><input type="text" placeholder="Apellido" name="surname"/></br>
+            <br><input type="text" placeholder="Email" name="email"/></br>
+            <br><input type="number" placeholder="Edad" name="age"/></br>
+            <br><input type="text" placeholder="Descripción" name="description"/></br>
+            <br></br>
+            <br><input type="submit" value="Enviar"/></br>
+        </form>
+        <br></br>
+        <a href="/webapp1/jsp/login.jsp">Iniciar Sesión</a>
     </body>
 </html>
