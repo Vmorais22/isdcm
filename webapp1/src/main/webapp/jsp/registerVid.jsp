@@ -14,7 +14,7 @@
     <body>
         <h1>Register video/h1>
             <!--title, author, creationDate, duration, views, description, format-->
-        <form action="/webapp1/servletRegisterVid" method="post">
+        <form action="servletRegisterVid" method="post">
             <br><input type="text" placeholder="Título" name="title"/></br>
             <br><input type="text" placeholder="Descripción" name="description"/></br>
             <br></br>

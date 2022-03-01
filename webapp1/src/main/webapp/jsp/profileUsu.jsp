@@ -4,15 +4,16 @@
     Author     : defie
 --%>
 
+<%@page import="model.Usuario"%>
 <%@page import="java.util.Objects"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <% 
+    // String usuario = (String) session.getAttribute("currentUser");
+    String usuario = request.getSession().getAttribute("currentUser").toString();
     if (Objects.isNull(request.getAttribute("dataProfile"))) {
-        System.out.println("ÑEÑE");
-        
-            request.getRequestDispatcher("/servletProfileUsu").forward(request, response);
+        request.setAttribute("dataProfile", new Usuario().getProfile(usuario));
     }
 %>
 <html>
@@ -20,16 +21,12 @@
         <title>Perfil del usuario</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/webapp1/css/style.css" >
+        <link rel="stylesheet" href="/css/style.css" >
     </head>
     <body>
-        <%
-            String usuario = (String) session.getAttribute("username");
-        %>
-        <div class="user">Usuario: <%= usuario %>. <form action="/webapp1/servletUsuarios" method="post"><button type="submit" name="button" value="logout">Cerrar sesi&oacute;n</button></form></div>
+        <div class="user">Usuario: <%= usuario %>. <form action="servletUsuarios" method="post"><button type="submit" name="button" value="logout">Cerrar sesi&oacute;n</button></form></div>
         <h1> Perfil de <%= usuario %> </h1>
-        <center> <a href="/webapp1/jsp/registroVid.jsp"><button type="button">Modificar perfil</button></a> </center>    
-        
+        <center> <a href="registroVid.jsp"><button type="button">Modificar perfil</button></a> </center>    
         <div>
             <table>
                 <tr>

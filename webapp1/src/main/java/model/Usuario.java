@@ -164,10 +164,12 @@ public class Usuario {
             {
                 if (r.getInt(1) == 0)
                     throw new UserDontExistsException();
+                else
+                    result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"),r.getURL("photo"));
+                
+                
             }
             System.out.println("9");
-            result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"),r.getURL("photo"));
-            System.out.println("10");
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
             System.out.println("error: "+e);

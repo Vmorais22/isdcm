@@ -53,26 +53,17 @@ public class servletUsuarios extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String username = request.getParameter("user");
+            String username = request.getParameter("username");
             String passwd = request.getParameter("passwd");
             
             boolean result = new Usuario().queryTest(username, passwd);
             
-            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEE: " + request.getContextPath() + "/profileUsu.jsp");
-            if (result) response.sendRedirect("/webapp1/jsp/profileUsu.jsp");//request.getContextPath());//) + "/login.jsp");
+            if (result){
+                request.getSession().setAttribute("currentUser", username);
+                //request.setAttribute("dataProfile", new Usuario().getProfile(username));
+                response.sendRedirect("/webapp1/jsp/profileUsu.jsp");
+            }
             else response.sendRedirect(request.getContextPath());    
-            
-            System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRR: "+ result);
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet servletEjemplo</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1> " + result + " </h1>");
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
