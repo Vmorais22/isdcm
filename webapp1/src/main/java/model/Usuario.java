@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -149,25 +150,21 @@ public class Usuario {
         Usuario result = null;
         Connection c = null;
         try {
-            System.out.println("1");
             PreparedStatement statement;
-            System.out.println("2");
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            System.out.println("3");
             c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
-            System.out.println("4");String query = "select * from USERS where username = ?";
-            System.out.println("5");statement = c.prepareStatement(query);
-            System.out.println("6");statement.setString(1, username);
-            System.out.println("7");ResultSet r = statement.executeQuery();
-            System.out.println("8");
+            String query = "select * from USERS where username = ?";
+            statement = c.prepareStatement(query);
+            statement.setString(1, username);
+            ResultSet r = statement.executeQuery();
             if (r.next())
             {
                 if (r.getInt(1) == 0)
                     throw new UserDontExistsException();
                 else
-                    result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"),r.getURL("photo"));
-                
-                
+                    System.out.println("entro en el else");
+                    
+                    result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"),null);                
             }
             System.out.println("9");
         } catch (Exception e) {
@@ -182,5 +179,32 @@ public class Usuario {
             }
         }
         return result;
+    }
+
+    public boolean storeUserInDb() throws ClassNotFoundException, SQLException {
+        
+            String INSERT_QUERY = "INSERT INTO USERS "
+           + "(userId, username, realName, surname, password, email, age, description, photo) "
+           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+           Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+           Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+           PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
+           preparedStatement.setInt(1, this.getUserid());
+           preparedStatement.setString(2, this.getUserName());
+           preparedStatement.setString(3, this.getRealName());
+           preparedStatement.setString(4, this.getSurName());
+           preparedStatement.setString(5, this.getPassword());
+           preparedStatement.setString(6, this.getEmail());
+           preparedStatement.setInt(7, this.getAge());
+           preparedStatement.setString(8, this.getPhoto().toString());
+
+           ResultSet r = preparedStatement.executeQuery();
+           //preparedStatement.setBlob(6, new ByteArrayInputStream(video.getDescription().getBytes()) );
+
+           System.out.println("Base de datos añadido: ");
+
+           return r.next();
+
     }
 }

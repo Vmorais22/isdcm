@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Login page</h1>
-        <form action="servletUsuarios" method="post">
+        <form action="servletUsuarios" method="get">
             <br><input type="text" placeholder="Username" name="username"/></br>
             <br><input type="password" placeholder="Contraseña" name="passwd"/></br>
             <br></br>
