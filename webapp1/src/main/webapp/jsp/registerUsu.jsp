@@ -26,6 +26,6 @@
             <br><input type="submit" value="Enviar"/></br>
         </form>
         <br></br>
-        <a href="login.jsp">Iniciar Sesión</a>
+        <a href="/webapp1/">Iniciar Sesión</a>
     </body>
 </html>
