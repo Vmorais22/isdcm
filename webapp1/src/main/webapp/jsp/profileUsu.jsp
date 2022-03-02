@@ -6,7 +6,6 @@
 
 <%@page import="model.Usuario"%>
 <%@page import="java.util.Objects"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <% 
@@ -24,7 +23,7 @@
         <link rel="stylesheet" href="/css/style.css" >
     </head>
     <body>
-        <div class="user">Usuario: <%= usuario %>. <form action="servletUsuarios" method="post"><button type="submit" name="button" value="logout">Cerrar sesi&oacute;n</button></form></div>
+        <div class="user">Usuario: <%= usuario %>. <form action="servletUsuarios" method="post"><button type="submit" name="button" value="logout">Cerrar sesión</button></form></div>
         <h1> Perfil de <%= usuario %> </h1>
         <center> <a href="registroVid.jsp"><button type="button">Modificar perfil</button></a> </center>    
         <div>
@@ -36,7 +35,7 @@
                     <th>Apellido</th>
                     <th>Email</th>
                     <th>Edad</th>
-                    <th>Descripci&oacute;n</th>
+                    <th>Descripción</th>
                     <th>Foto</th>
                 </tr>
                 <c:forEach var="user" items="${dataProfile}">

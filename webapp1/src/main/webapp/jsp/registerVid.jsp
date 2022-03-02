@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Register video/h1>
+        <h1>Register video</h1>
             <!--title, author, creationDate, duration, views, description, format-->
         <form action="servletRegisterVid" method="post">
             <br><input type="text" placeholder="Título" name="title"/></br>
