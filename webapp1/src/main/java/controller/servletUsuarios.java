@@ -25,7 +25,6 @@ public class servletUsuarios extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            System.out.println("holaaaaa get");
             String username = request.getParameter("username");
             String passwd = request.getParameter("passwd");
             
@@ -40,9 +39,7 @@ public class servletUsuarios extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       System.out.println("holaaaaa post");
         try {
-            System.out.println("holaaaaa post.try");
             if(createNewUser(request)){
                 request.getSession().setAttribute("currentUser", request.getParameter("username"));
                 response.sendRedirect("/webapp1/jsp/profileUsu.jsp");
@@ -71,16 +68,12 @@ public class servletUsuarios extends HttpServlet {
     }
     
     private boolean createNewUser(HttpServletRequest request) throws UserAlreadyExistsException, MalformedURLException, SQLException, ClassNotFoundException {
-        System.out.println("holaaaaa createNewUser");
         if (!exists(request.getParameter("username"))) {
-            System.out.println("entro porque no existe");
             
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
             PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(USERID) as USERID FROM USERS");
             ResultSet r = preparedStatement.executeQuery();
             
-            System.out.println("r:" + r.next());
-            //System.out.println("r:" + r.get);
             Integer userId = r.getInt("USERID")+1;
             System.out.println("userId:" + userId);
             
@@ -96,7 +89,6 @@ public class servletUsuarios extends HttpServlet {
                     //,
                     //new URL(request.getParameter("photo"))
             );
-            System.out.println("Usuario creado con username: " + newUser.getUserName());
             
             return newUser.storeUserInDb();
         } 

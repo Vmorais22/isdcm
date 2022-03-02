@@ -85,4 +85,30 @@ public class Video {
     public void setFormat(String format) {
         this.format = format;
     }
+
+    public boolean storeVideoInDb throws ClassNotFoundException, SQLException {
+                    System.out.println("Llegamos al modelo");
+
+           private static final String INSERT_QUERY = "INSERT INTO VIDEOS "
+            + "(videoId, title, author, creationDate, duration, views, description, format) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+           Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+            PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
+            preparedStatement.setInt(1, newVideo.getVideoId());
+            preparedStatement.setString(2, newVideo.getTitle());
+            preparedStatement.setString(3, newVideo.getAuthor());
+            preparedStatement.setString(4, newVideo.getCreationDate());
+            preparedStatement.setString(5, newVideo.getDuration());
+            preparedStatement.setInt(6,  newVideo.getViews()); //new videos always will have 0 views when created
+            preparedStatement.setString(7, newVideo.getDescription());
+            preparedStatement.setString(8, newVideo.getFormat());
+System.out.println("Statement preparado");
+           //ResultSet r = preparedStatement.executeUpdate();
+           int aux = preparedStatement.executeUpdate();
+           //preparedStatement.setBlob(6, new ByteArrayInputStream(video.getDescription().getBytes()) );
+System.out.println("hecho");
+           return true;
+
+    }
 }

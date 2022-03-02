@@ -34,22 +34,28 @@ public class servletRegistroVid extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("llego al do post");       
+}
         try {
-            createNewVideo(request);
+            if(createNewVideo(request)){
+                request.getSession().setAttribute("currentUser", request.getParameter("username"));
+                response.sendRedirect("/webapp1/jsp/profileUsu.jsp");
+            }
             response.setStatus(HttpServletResponse.SC_OK);
+            
         } 
         catch (VideoAlreadyExistsException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            System.err.println("Video already exists");
+            System.err.println("User already exists");
         }
         catch (Exception e)
         {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             System.err.println("Unexpected error ocurred: " + e);
-        }
-    }
+        }       
 
     private static boolean exists(int videoId) throws SQLException {
+        System.out.println("entro en el exist"); 
         Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
         PreparedStatement preparedStatement = c.prepareStatement(SELECT_BY_ID);
         preparedStatement.setInt(1, videoId);
@@ -57,34 +63,31 @@ public class servletRegistroVid extends HttpServlet {
     }
 
     private void createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException, SQLException, ClassNotFoundException {
+        System.out.println("Entro en createNewVideo");       
         if (!exists(parseInt(request.getParameter("videoId")))) {
-            
+            System.out.println("El video no existe");    
+            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(USERID) as USERID FROM USERS");
+            ResultSet r = preparedStatement.executeQuery();
 
+            Integer videoId = r.getInt("USERID")+1;
+            System.out.println("El proximo userid será " + videoId);
             Video newVideo = new Video(
-                    parseInt(request.getParameter("videoId")),
+                    videoId,
                     request.getParameter("title"),
-                    request.getParameter("author"),
-                    request.getParameter("creationDate"),
-                    request.getParameter("duration"),
-                    parseInt(request.getParameter("views")),
+                    "autor",//tendria que ser el username del perfil 
+                   "23-2", //actual
+                    "3";,//valor random (ThreadLocalRandom.current().nextInt(0, 10)).toString() + ":" + (ThreadLocalRandom.current().nextInt(0, 10)).toString()
+                    0,
                     request.getParameter("description"),
                     request.getParameter("format")
             //new URL(request.getParameter("url")),
             //new URL(request.getParameter("image")),
             );
+            System.out.println("Video object creado");
+
+            return newVideo.storeVideoInDb();
             
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
-            PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
-            preparedStatement.setInt(1, newVideo.getVideoId());
-            preparedStatement.setString(2, newVideo.getTitle());
-            preparedStatement.setString(3, newVideo.getAuthor());
-            preparedStatement.setString(4, newVideo.getCreationDate());
-            preparedStatement.setString(5, newVideo.getDuration());
-            preparedStatement.setInt(6, 0); //new videos always will have 0 views when created
-            preparedStatement.setString(7, newVideo.getDescription());
-            preparedStatement.setString(8, newVideo.getFormat());
-            //preparedStatement.setBlob(6, new ByteArrayInputStream(video.getDescription().getBytes()) );
         }
         else {
             throw new VideoAlreadyExistsException();

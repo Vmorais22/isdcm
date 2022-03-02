@@ -59,6 +59,11 @@
         </div>
         <br></br>        
         <div class="user">
+            <a href="registerVid.jsp">
+                <button>Subir nuevo video</button>
+            </a>
+            </br>
+            </br>
             <form action="servletUsuarios" method="post">
                 <button type="submit" name="button" value="logout">Cerrar sesión</button>
             </form>
