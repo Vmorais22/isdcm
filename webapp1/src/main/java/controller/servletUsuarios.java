@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Usuario;
 
@@ -73,8 +74,17 @@ public class servletUsuarios extends HttpServlet {
         System.out.println("holaaaaa createNewUser");
         if (!exists(request.getParameter("username"))) {
             System.out.println("entro porque no existe");
+            
+            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(USERID) as USERID FROM USERS");
+            ResultSet r = preparedStatement.executeQuery();
+            
+            System.out.println("r:" + r.next());
+            Integer userId = r.getInt("USERID")+1;
+            System.out.println("userId:" + userId);
+            
             Usuario newUser = new Usuario(
-                    3,
+                    userId,
                     request.getParameter("username"),
                     request.getParameter("realName"),
                     request.getParameter("surName"),
