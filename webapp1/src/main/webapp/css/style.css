@@ -8,3 +8,7 @@ and open the template in the editor.
     Author     : defie
 */
 
+table,th,td{
+    border: 1px solid black;
+    
+}

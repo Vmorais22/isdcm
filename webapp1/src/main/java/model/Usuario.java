@@ -136,7 +136,7 @@ public class Usuario {
         return result;                        
     }
 
-    public Object getProfile(String username) {
+    public Usuario getProfile(String username) {
         Usuario result = null;
         Connection c = null;
         try {

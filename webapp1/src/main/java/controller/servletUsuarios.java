@@ -80,6 +80,7 @@ public class servletUsuarios extends HttpServlet {
             ResultSet r = preparedStatement.executeQuery();
             
             System.out.println("r:" + r.next());
+            //System.out.println("r:" + r.get);
             Integer userId = r.getInt("USERID")+1;
             System.out.println("userId:" + userId);
             
