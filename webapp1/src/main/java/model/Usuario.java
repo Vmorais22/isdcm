@@ -27,11 +27,10 @@ public class Usuario {
     private String email;
     private int age;
     private String description;
-    private URL photo;
     
     public Usuario(){}
     
-    public Usuario(int userid, String userName, String realName, String surName, String password, String email, int age, String description, URL photo) {
+    public Usuario(int userid, String userName, String realName, String surName, String password, String email, int age, String description) {
         this.userid = userid;
         this.userName = userName;
         this.realName = realName;
@@ -40,7 +39,6 @@ public class Usuario {
         this.email = email;
         this.age = age;
         this.description = description;
-        this.photo = photo;
     }
 
     public int getUserid() {
@@ -107,14 +105,6 @@ public class Usuario {
         this.description = description;
     }
 
-    public URL getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(URL photo) {
-        this.photo = photo;
-    }
-
     public boolean queryTest(String username, String passwd) {
         boolean result = true;
         Connection c = null;
@@ -164,7 +154,7 @@ public class Usuario {
                 else
                     System.out.println("entro en el else");
                     
-                    result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"),null);                
+                    result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"));                
             }
             System.out.println("9");
         } catch (Exception e) {
@@ -184,8 +174,8 @@ public class Usuario {
     public boolean storeUserInDb() throws ClassNotFoundException, SQLException {
         
             String INSERT_QUERY = "INSERT INTO USERS "
-           + "(userId, username, realName, surname, password, email, age, description, photo) "
-           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+           + "(userId, username, realName, surname, password, email, age, description) "
+           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
            Class.forName("org.apache.derby.jdbc.ClientDriver");
 
            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
@@ -197,14 +187,15 @@ public class Usuario {
            preparedStatement.setString(5, this.getPassword());
            preparedStatement.setString(6, this.getEmail());
            preparedStatement.setInt(7, this.getAge());
-           preparedStatement.setString(8, this.getPhoto().toString());
+           preparedStatement.setString(8, this.getDescription());
 
-           ResultSet r = preparedStatement.executeQuery();
+           //ResultSet r = preparedStatement.executeUpdate();
+           int aux = preparedStatement.executeUpdate();
            //preparedStatement.setBlob(6, new ByteArrayInputStream(video.getDescription().getBytes()) );
 
            System.out.println("Base de datos añadido: ");
 
-           return r.next();
+           return true;
 
     }
 }

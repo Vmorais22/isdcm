@@ -20,6 +20,6 @@
             <br><input type="submit" value="Enviar"/></br>           
         </form>
         <br></br>
-        <a href="/webapp1/jsp/registerUsu.jsp">¿No estás registrado?</a>
+        <a href="jsp/registerUsu.jsp">¿No estás registrado?</a>
     </body>
 </html>

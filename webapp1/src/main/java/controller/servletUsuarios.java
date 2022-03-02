@@ -41,7 +41,7 @@ public class servletUsuarios extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        System.out.println("holaaaaa post");
         try {
-            
+            System.out.println("holaaaaa post.try");
             if(createNewUser(request)){
                 request.getSession().setAttribute("currentUser", request.getParameter("username"));
                 response.sendRedirect("/webapp1/jsp/profileUsu.jsp");
@@ -62,26 +62,28 @@ public class servletUsuarios extends HttpServlet {
         
     }
 
-    private static boolean exists(int userId) throws SQLException {
+    private static boolean exists(String username) throws SQLException {
         Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
-        PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM VIDEOS WHERE userId = ?");
-        preparedStatement.setInt(1, userId);
+        PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM USERS WHERE username = ?");
+        preparedStatement.setString(1, username);
         return preparedStatement.executeQuery().next();
     }
     
     private boolean createNewUser(HttpServletRequest request) throws UserAlreadyExistsException, MalformedURLException, SQLException, ClassNotFoundException {
-        if (!exists(parseInt(request.getParameter("userId")))) {
+        System.out.println("holaaaaa createNewUser");
+        if (!exists(request.getParameter("username"))) {
             System.out.println("entro porque no existe");
             Usuario newUser = new Usuario(
-                    parseInt(request.getParameter("userId")),
+                    3,
                     request.getParameter("username"),
                     request.getParameter("realName"),
                     request.getParameter("surName"),
-                    request.getParameter("passw"),
+                    request.getParameter("passwd"),
                     request.getParameter("email"),
                     parseInt(request.getParameter("age")),
-                    request.getParameter("description"),
-                    new URL(request.getParameter("photo"))
+                    request.getParameter("description")
+                    //,
+                    //new URL(request.getParameter("photo"))
             );
             System.out.println("Usuario creado con username: " + newUser.getUserName());
             

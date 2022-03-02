@@ -13,12 +13,12 @@
     </head>
     <body>
         <h1>Register user page</h1>
-        <form action="servletUsuarios" method="post">
+        <form action="/webapp1/servletUsuarios" method="post">
             <br><input type="text" placeholder="Username" name="username"/></br>
             <br><input type="password" placeholder="Contraseña" name="passwd"/></br>
             <br><input type="password" placeholder="Repita contraseña" name="passwd2"/></br>
             <br><input type="text" placeholder="Nombre" name="realName"/></br>
-            <br><input type="text" placeholder="Apellido" name="surname"/></br>
+            <br><input type="text" placeholder="Apellido" name="surName"/></br>
             <br><input type="text" placeholder="Email" name="email"/></br>
             <br><input type="number" placeholder="Edad" name="age" min="12" max="100"/></br>
             <br><input type="text" placeholder="Descripción" name="description"/></br>

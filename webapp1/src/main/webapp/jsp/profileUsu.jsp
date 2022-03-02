@@ -47,7 +47,6 @@
                     <td>${user.email}</td>
                     <td>${user.age}</td>
                     <td>${user.description}</td>
-                    <td>${user.photo}</td>
                     </tr>
                 </c:forEach>
             </table>

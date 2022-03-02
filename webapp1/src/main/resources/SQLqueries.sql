@@ -20,8 +20,7 @@ create table users (
     email       varchar(100)    not null,
 
     age         numeric,
-    description varchar(300),
-    photo       blob
+    description varchar(300)
 
      );
 
@@ -39,11 +38,11 @@ create table videos (
 alter table users add constraint age_between_range check (age >= 12 and age <= 100);
 
 
-INSERT INTO users (userID, username, realName, surname, password, email, age, description, photo)
-VALUES (1,'Uriel27','Uriel','Andrango','123','uriel@hotmail.com',22,'No español, no comprendo',null);
+INSERT INTO users (userID, username, realName, surname, password, email, age, description)
+VALUES (1,'Uriel27','Uriel','Andrango','123','uriel@hotmail.com',22,'No español, no comprendo');
 
-INSERT INTO users (userID, username, realName, surname, password, email, age, description, photo)
-VALUES (2,'AdriByte','Adri','Alv','1234','adri@hotmail.com',22,'UWU',null);
+INSERT INTO users (userID, username, realName, surname, password, email, age, description)
+VALUES (2,'AdriByte','Adri','Alv','1234','adri@hotmail.com',22,'UWU');
 
 INSERT INTO videos (videoId, title, author, creationDate, duration, views, description, format)
 VALUES (1,'Trailer Spiderman No way Home','Marvel', DATE ('2015-12-17'),'13:30',3000,'No me quiero ir Sr Stark :(','mp4');

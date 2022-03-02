@@ -5,35 +5,38 @@
          version="4.0">
     <!-- Servlet mappings -->
     <servlet>
-        <servlet-name>servletListadoVid</servlet-name> <!-- name -->
-        <servlet-class>controller.servletListadoVid</servlet-class> <!-- package -->
+        <display-name>servletListadoVid</display-name>
+        <servlet-name>servletListadoVid</servlet-name>
+        <servlet-class>controller.servletListadoVid</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>servletListadoVid</servlet-name> <!-- same name -->
-        <url-pattern>/servletListadoVid</url-pattern> <!-- url from root / -->
+        <servlet-name>servletListadoVid</servlet-name>
+        <url-pattern>/servletListadoVid</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>servletRegistroVid</servlet-name> <!-- name -->
-        <servlet-class>controller.servletRegistroVid</servlet-class> <!-- package -->
+        <display-name>servletRegistroVid</display-name>
+        <servlet-name>servletRegistroVid</servlet-name>
+        <servlet-class>controller.servletRegistroVid</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>servletRegistroVid</servlet-name> <!-- same name -->
-        <url-pattern>/servletRegistroVid</url-pattern> <!-- url from root / -->
+        <servlet-name>servletRegistroVid</servlet-name>
+        <url-pattern>/servletRegistroVid</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>servletUsuarios</servlet-name> <!-- name -->
-        <servlet-class>controller.servletUsuarios</servlet-class> <!-- package -->
+        <display-name>servletUsuarios</display-name>
+        <servlet-name>servletUsuarios</servlet-name>
+        <servlet-class>controller.servletUsuarios</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>servletUsuarios</servlet-name> <!-- same name -->
-        <url-pattern>/servletUsuarios</url-pattern> <!-- url from root / -->
+        <servlet-name>servletUsuarios</servlet-name>
+        <url-pattern>/servletUsuarios</url-pattern>
     </servlet-mapping>
     
     <!-- **** -->
     <welcome-file-list>  
         <welcome-file>jsp/login.jsp</welcome-file>  
     </welcome-file-list>
-    <!--    <servlet-mapping>
+<!--    <servlet-mapping>
         <servlet-name>listadoVid</servlet-name>
         <url-pattern>/servletListadoVid</url-pattern>
     </servlet-mapping>-->
