@@ -21,8 +21,6 @@ import model.Usuario;
 @WebServlet(name = "servletListadoVid", urlPatterns = {"/servletListadoVid"})
 public class servletUsuarios extends HttpServlet {
 
-    private static final String SELECT_BY_ID = "SELECT * FROM VIDEOS WHERE userId = ?";
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             String username = request.getParameter("username");
@@ -73,7 +71,7 @@ public class servletUsuarios extends HttpServlet {
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
             PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(USERID) as USERID FROM USERS");
             ResultSet r = preparedStatement.executeQuery();
-            
+            r.next();
             Integer userId = r.getInt("USERID")+1;
             System.out.println("userId:" + userId);
             

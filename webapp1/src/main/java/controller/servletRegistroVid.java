@@ -12,7 +12,11 @@ import controller.Exceptions.VideoAlreadyExistsException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import model.Video;
 
 @WebServlet(name = "servletListadoVid", urlPatterns = {"/servletListadoVid"})
@@ -35,7 +39,7 @@ public class servletRegistroVid extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("llego al do post");       
-}
+        
         try {
             if(createNewVideo(request)){
                 request.getSession().setAttribute("currentUser", request.getParameter("username"));
@@ -53,31 +57,25 @@ public class servletRegistroVid extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             System.err.println("Unexpected error ocurred: " + e);
         }       
-
-    private static boolean exists(int videoId) throws SQLException {
-        System.out.println("entro en el exist"); 
-        Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr21;user=pr21;password=pr21");
-        PreparedStatement preparedStatement = c.prepareStatement(SELECT_BY_ID);
-        preparedStatement.setInt(1, videoId);
-        return preparedStatement.executeQuery().next();
     }
 
-    private void createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException, SQLException, ClassNotFoundException {
+    private boolean createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException, SQLException, ClassNotFoundException {
         System.out.println("Entro en createNewVideo");       
-        if (!exists(parseInt(request.getParameter("videoId")))) {
+        
             System.out.println("El video no existe");    
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(USERID) as USERID FROM USERS");
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(VIDEOID) as VIDEOID FROM VIDEOS");
             ResultSet r = preparedStatement.executeQuery();
+            r.next();
 
-            Integer videoId = r.getInt("USERID")+1;
+            Integer videoId = r.getInt("VIDEOID")+1;
             System.out.println("El proximo userid será " + videoId);
             Video newVideo = new Video(
                     videoId,
                     request.getParameter("title"),
                     "autor",//tendria que ser el username del perfil 
-                   "23-2", //actual
-                    "3";,//valor random (ThreadLocalRandom.current().nextInt(0, 10)).toString() + ":" + (ThreadLocalRandom.current().nextInt(0, 10)).toString()
+                   LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")), //actual
+                    "3",//valor random (ThreadLocalRandom.current().nextInt(0, 10)).toString() + ":" + (ThreadLocalRandom.current().nextInt(0, 10)).toString()
                     0,
                     request.getParameter("description"),
                     request.getParameter("format")
@@ -88,9 +86,5 @@ public class servletRegistroVid extends HttpServlet {
 
             return newVideo.storeVideoInDb();
             
-        }
-        else {
-            throw new VideoAlreadyExistsException();
-        }
     }
 }
