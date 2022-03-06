@@ -43,7 +43,7 @@ public class servletRegistroVid extends HttpServlet {
         
         try {
             if(createNewVideo(request)){
-                response.sendRedirect("/webapp1/jsp/profileUsu.jsp");
+                response.sendRedirect("/webapp1/jsp/listadoVid.jsp");
             }
             response.setStatus(HttpServletResponse.SC_OK);
             
