@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import model.Video;
+import java.util.Random;
 
 @WebServlet(name = "servletListadoVid", urlPatterns = {"/servletListadoVid"})
 public class servletRegistroVid extends HttpServlet {
@@ -67,16 +68,25 @@ public class servletRegistroVid extends HttpServlet {
             PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(VIDEOID) as VIDEOID FROM VIDEOS");
             ResultSet r = preparedStatement.executeQuery();
             r.next();
+            
+            Random random = new Random();
+            int randomHours = random.nextInt(20);
+            int randomMinutes = random.nextInt(59);
+            int randomSeconds = random.nextInt(59);
+            String duracionHours = String.valueOf(randomHours);
+            String duracionMinutes = String.valueOf(randomMinutes);
+            String duracionSeconds = String.valueOf(randomSeconds);
 
             Integer videoId = r.getInt("VIDEOID")+1;
             System.out.println("El proximo userid será " + videoId);
             Video newVideo = new Video(
                     videoId,
                     request.getParameter("title"),
-                    "autor",//tendria que ser el username del perfil 
+                    request.getSession().getAttribute("currentUser").toString(),//tendria que ser el username del perfil 
                     //LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")), //actual
-                    "2015-12-17",
-                    "13:30",//valor random (ThreadLocalRandom.current().nextInt(0, 10)).toString() + ":" + (ThreadLocalRandom.current().nextInt(0, 10)).toString()
+                    "",
+                    duracionHours+":"+duracionMinutes+":"+duracionSeconds,
+                    //"13:30",//valor random (ThreadLocalRandom.current().nextInt(0, 10)).toString() + ":" + (ThreadLocalRandom.current().nextInt(0, 10)).toString()
                     0,
                     request.getParameter("description"),
                     request.getParameter("format")
