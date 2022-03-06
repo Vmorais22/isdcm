@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -94,29 +95,31 @@ public class Video {
     }
 
     public boolean storeVideoInDb() throws ClassNotFoundException, SQLException {
-          System.out.println("Llegamos al modelo");
+        System.out.println("Llegamos al modelo");
 
-           String INSERT_QUERY = "INSERT INTO VIDEOS "
+        Date sqlDate = new Date(System.currentTimeMillis());
+        
+        String INSERT_QUERY = "INSERT INTO VIDEOS "
             + "(videoId, title, author, creationDate, duration, views, description, format) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-           Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+        Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
 
-            PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
-            preparedStatement.setInt(1, this.getVideoId());
-            preparedStatement.setString(2, this.getTitle());
-            preparedStatement.setString(3, this.getAuthor());
-            preparedStatement.setString(4, this.getCreationDate());
-            preparedStatement.setString(5, this.getDuration());
-            preparedStatement.setInt(6,  this.getViews()); //new videos always will have 0 views when created
-            preparedStatement.setString(7, this.getDescription());
-            preparedStatement.setString(8, this.getFormat());
-            System.out.println("Statement preparado");
-           //ResultSet r = preparedStatement.executeUpdate();
-           int aux = preparedStatement.executeUpdate();
-           //preparedStatement.setBlob(6, new ByteArrayInputStream(video.getDescription().getBytes()) );
-            System.out.println("hecho");
-           return true;
+        PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
+        preparedStatement.setInt(1, this.getVideoId());
+        preparedStatement.setString(2, this.getTitle());
+        preparedStatement.setString(3, this.getAuthor());
+        preparedStatement.setString(4, sqlDate.toString());
+        preparedStatement.setString(5, this.getDuration());
+        preparedStatement.setInt(6,  this.getViews()); //new videos always will have 0 views when created
+        preparedStatement.setString(7, this.getDescription());
+        preparedStatement.setString(8, this.getFormat());
+        System.out.println("Statement preparado");
+        //ResultSet r = preparedStatement.executeUpdate();
+        int aux = preparedStatement.executeUpdate();
+        //preparedStatement.setBlob(6, new ByteArrayInputStream(video.getDescription().getBytes()) );
+        System.out.println("hecho");
+        return true;
 
     }
 }

@@ -64,9 +64,10 @@
             </a>
             </br>
             </br>
-            <form action="servletUsuarios" method="post">
-                <button type="submit" name="button" value="logout">Cerrar sesión</button>
-            </form>
+            <a href="/webapp1/
+               ">
+                <button>Cerrar sesión</button>
+            </a>
         </div>
         <!--<center> <button type="button" action="/webapp1/servletListadoVid" method="get">Mis videos</button></a> </center>    -->
     </body>

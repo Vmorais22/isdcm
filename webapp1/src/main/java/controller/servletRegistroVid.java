@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -42,7 +43,6 @@ public class servletRegistroVid extends HttpServlet {
         
         try {
             if(createNewVideo(request)){
-                request.getSession().setAttribute("currentUser", request.getParameter("username"));
                 response.sendRedirect("/webapp1/jsp/profileUsu.jsp");
             }
             response.setStatus(HttpServletResponse.SC_OK);
@@ -74,8 +74,9 @@ public class servletRegistroVid extends HttpServlet {
                     videoId,
                     request.getParameter("title"),
                     "autor",//tendria que ser el username del perfil 
-                   LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")), //actual
-                    "3",//valor random (ThreadLocalRandom.current().nextInt(0, 10)).toString() + ":" + (ThreadLocalRandom.current().nextInt(0, 10)).toString()
+                    //LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")), //actual
+                    "2015-12-17",
+                    "13:30",//valor random (ThreadLocalRandom.current().nextInt(0, 10)).toString() + ":" + (ThreadLocalRandom.current().nextInt(0, 10)).toString()
                     0,
                     request.getParameter("description"),
                     request.getParameter("format")

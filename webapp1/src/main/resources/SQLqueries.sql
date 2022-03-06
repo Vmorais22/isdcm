@@ -28,7 +28,7 @@ create table videos (
     videoId      numeric         primary key,
     title        varchar(100)    not null,
     author       varchar(100)    not null,
-    creationDate date            not null,
+    creationDate varchar(100)    not null,
     duration     time            not null,
     views        numeric         not null default 0,
     description  varchar(255)    not null,
@@ -45,4 +45,4 @@ INSERT INTO users (userID, username, realName, surname, password, email, age, de
 VALUES (2,'AdriByte','Adri','Alv','1234','adri@hotmail.com',22,'UWU');
 
 INSERT INTO videos (videoId, title, author, creationDate, duration, views, description, format)
-VALUES (1,'Trailer Spiderman No way Home','Marvel', DATE ('2015-12-17'),'13:30',3000,'No me quiero ir Sr Stark :(','mp4');
+VALUES (1,'Trailer Spiderman No way Home','Marvel', '2015-12-17','13:30',3000,'No me quiero ir Sr Stark :(','mp4');
