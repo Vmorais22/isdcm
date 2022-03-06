@@ -59,8 +59,13 @@
         </div>
         <br></br>        
         <div class="user">
+            <a href="listadoVid.jsp">
+                <button>Listado de vídeos</button>
+            </a>
+            </br>
+            </br>
             <a href="registerVid.jsp">
-                <button>Subir nuevo video</button>
+                <button>Subir nuevo vídeo</button>
             </a>
             </br>
             </br>
