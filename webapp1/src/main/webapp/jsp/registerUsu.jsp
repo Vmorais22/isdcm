@@ -14,17 +14,31 @@
     <body>
         <h1>Register user page</h1>
         <form action="/webapp1/servletUsuarios" method="post">
-            <br><input type="text" placeholder="Username" name="username"/></br>
-            <br><input type="password" placeholder="Contraseña" name="passwd"/></br>
-            <br><input type="password" placeholder="Repita contraseña" name="passwd2"/></br>
-            <br><input type="text" placeholder="Nombre" name="realName"/></br>
-            <br><input type="text" placeholder="Apellido" name="surName"/></br>
-            <br><input type="text" placeholder="Email" name="email"/></br>
+            <br><input type="text" placeholder="Username" name="username" maxlength="16" /></br>
+            <br><input type="password" id="txtPassword" placeholder="Contraseña" name="passwd" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres"/></br>
+            <br><input type="password" id="txtConfirmPassword" placeholder="Repita contraseña" name="passwd2" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres"/></br>
+            <br><input type="text" placeholder="Nombre" name="realName" maxlength="20"/></br>
+            <br><input type="text" placeholder="Apellido" name="surName"maxlength="20"/></br>
+            <br><input type="email" placeholder="Email" name="email" maxlength="50"/></br>
             <br><input type="number" placeholder="Edad" name="age" min="12" max="100"/></br>
-            <br><input type="text" placeholder="Descripción" name="description"/></br>
+            <br><input type="text" placeholder="Descripción" name="description" maxlength="200"/></br>
             <br></br>
             <br><input type="submit" value="Enviar"/></br>
         </form>
+        <script type="text/javascript">
+    window.onload = function () {
+        var txtPassword = document.getElementById("txtPassword");
+        var txtConfirmPassword = document.getElementById("txtConfirmPassword");
+        txtPassword.onchange = ConfirmPassword;
+        txtConfirmPassword.onkeyup = ConfirmPassword;
+        function ConfirmPassword() {
+            txtConfirmPassword.setCustomValidity("");
+            if (txtPassword.value !== txtConfirmPassword.value) {
+                txtConfirmPassword.setCustomValidity("Las contraseñas no coinciden.");
+            }
+        }
+    }
+</script>
         <br></br>
         <a href="/webapp1/">Iniciar Sesión</a>
     </body>
