@@ -15,9 +15,9 @@
         <h1>Register video</h1>
             <!--title, author, creationDate, duration, views, description, format-->
         <form action="/webapp1/servletRegistroVid" method="post">
-            <br><input type="text" placeholder="Título" name="title"/></br>
-            <br><input type="text" placeholder="Descripción" name="description"/></br>
-            <br><input type="text" placeholder="Formato" name="format"/></br>
+            <br><input type="text" placeholder="Título" name="title" maxlength="50"/></br>
+            <br><input type="text" placeholder="Descripción" name="description" maxlength="200"/></br>
+            <br><input type="text" placeholder="Formato" name="format" maxlength="10"/></br>
             <br></br>
             <br><input type="submit" value="Enviar"/></br>          
         </form>
