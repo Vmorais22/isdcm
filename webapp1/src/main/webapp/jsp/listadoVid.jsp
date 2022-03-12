@@ -33,6 +33,7 @@
         <div>
             <table>
                 <tr>
+                    <th>Miniatura</th>
                     <th>Id</th>
                     <th>Título</th>
                     <th>Autor</th>
@@ -41,9 +42,11 @@
                     <th>Vistas</th>
                     <th>Descripción</th>
                     <th>Formato</th>
+                    <th>Video</th>
                 </tr>
                 <% while(r.next()) { %>   
                 <tr>
+                    <td><img src=<%= r.getString("miniature")%> alt="pic" width="100" height="50" /></td>
                     <td><%= r.getString("videoId") %></td>
                     <td><%= r.getString("title") %></td>
                     <td><%= r.getString("author") %></td>
@@ -52,6 +55,8 @@
                     <td><%= r.getString("views") %></td>
                     <td><%= r.getString("description") %></td>
                     <td><%= r.getString("format") %></td>
+                    <td><%= r.getString("url") %></td>
+
                 </tr>
                 <% } %>
             </table>

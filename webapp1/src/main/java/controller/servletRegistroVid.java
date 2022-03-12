@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
 import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +13,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import model.Video;
 import java.util.Random;
 
@@ -27,7 +22,6 @@ public class servletRegistroVid extends HttpServlet {
     private static final String INSERT_QUERY = "INSERT INTO VIDEOS "
             + "(videoId, title, author, creationDate, duration, views, description, format) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_BY_ID = "SELECT * FROM VIDEOS WHERE videoId = ?";
 
    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -63,7 +57,6 @@ public class servletRegistroVid extends HttpServlet {
     private boolean createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException, SQLException, ClassNotFoundException {
         System.out.println("Entro en createNewVideo");       
         
-            System.out.println("El video no existe");    
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
             PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(VIDEOID) as VIDEOID FROM VIDEOS");
             ResultSet r = preparedStatement.executeQuery();
@@ -78,23 +71,18 @@ public class servletRegistroVid extends HttpServlet {
             String duracionSeconds = String.valueOf(randomSeconds);
 
             Integer videoId = r.getInt("VIDEOID")+1;
-            System.out.println("El proximo userid será " + videoId);
             Video newVideo = new Video(
                     videoId,
                     request.getParameter("title"),
                     request.getSession().getAttribute("currentUser").toString(),//tendria que ser el username del perfil 
-                    //LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")), //actual
                     "",
                     duracionHours+":"+duracionMinutes+":"+duracionSeconds,
-                    //"13:30",//valor random (ThreadLocalRandom.current().nextInt(0, 10)).toString() + ":" + (ThreadLocalRandom.current().nextInt(0, 10)).toString()
                     0,
                     request.getParameter("description"),
-                    request.getParameter("format")
-            //new URL(request.getParameter("url")),
-            //new URL(request.getParameter("image")),
+                    request.getParameter("format"),
+                    request.getParameter("url"),
+                    request.getParameter("miniature")
             );
-            System.out.println("Video object creado");
-
             return newVideo.storeVideoInDb();
             
     }

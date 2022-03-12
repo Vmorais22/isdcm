@@ -18,6 +18,8 @@
             <br><input type="text" placeholder="Título" name="title" maxlength="50"/></br>
             <br><input type="text" placeholder="Descripción" name="description" maxlength="200"/></br>
             <br><input type="text" placeholder="Formato" name="format" maxlength="10"/></br>
+            <br><input type="url" placeholder="Url del video" name="url" id="myURL"/></br>
+            <br><input type="url" placeholder="Miniatura (url)" name="miniature"/></br>
             <br></br>
             <br><input type="submit" value="Enviar"/></br>          
         </form>

@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Video {
 
@@ -18,8 +16,10 @@ public class Video {
     private int views;
     private String description;
     private String format;
+    private String url;
+    private String miniature;
 
-    public Video(int videoId, String title, String author, String creationDate, String duration, int views, String description, String format) {
+    public Video(int videoId, String title, String author, String creationDate, String duration, int views, String description, String format, String url, String miniature) {
         this.videoId = videoId;
         this.title = title;
         this.author = author;
@@ -28,6 +28,8 @@ public class Video {
         this.views = views;
         this.description = description;
         this.format = format;
+        this.url = url;
+        this.miniature = miniature;
     }
 
     public int getVideoId() {
@@ -94,14 +96,28 @@ public class Video {
         this.format = format;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    
+    public String getMiniature() {
+        return miniature;
+    }
+
+    public void setMiniature(String miniature) {
+        this.miniature = miniature;
+    }
     public boolean storeVideoInDb() throws ClassNotFoundException, SQLException {
-        System.out.println("Llegamos al modelo");
 
         Date sqlDate = new Date(System.currentTimeMillis());
         
         String INSERT_QUERY = "INSERT INTO VIDEOS "
-            + "(videoId, title, author, creationDate, duration, views, description, format) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            + "(videoId, title, author, creationDate, duration, views, description, format, url, miniature) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
 
@@ -114,11 +130,9 @@ public class Video {
         preparedStatement.setInt(6,  this.getViews()); //new videos always will have 0 views when created
         preparedStatement.setString(7, this.getDescription());
         preparedStatement.setString(8, this.getFormat());
-        System.out.println("Statement preparado");
-        //ResultSet r = preparedStatement.executeUpdate();
-        int aux = preparedStatement.executeUpdate();
-        //preparedStatement.setBlob(6, new ByteArrayInputStream(video.getDescription().getBytes()) );
-        System.out.println("hecho");
+        preparedStatement.setString(9, this.getUrl());
+        preparedStatement.setString(10, this.getMiniature());
+        preparedStatement.executeUpdate();
         return true;
 
     }
