@@ -1,50 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
+import controller.Exceptions.UserDontExistsException;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import controller.Exceptions.UserAlreadyExistsException;
-import java.net.MalformedURLException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import model.Usuario;
 
-@WebServlet(name = "servletListadoVid", urlPatterns = {"/servletListadoVid"})
-public class servletUsuarios extends HttpServlet {
+/**
+ *
+ * @author Victor
+ */
+@WebServlet(name = "servletProfileModUsu", urlPatterns = {"/servletProfileModUsu"})
+
+public class servletProfileModUsu extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String username = request.getParameter("username");
-            String passwd = request.getParameter("passwd");
-            
-            boolean result = new Usuario().queryTest(username, passwd);
-            if (result){
-                request.getSession().setAttribute("currentUser", username);
-                response.sendRedirect("/webapp1/jsp/profileUsu.jsp");
-            }
-            else response.sendRedirect(request.getContextPath());    
+            // none  
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if(createNewUser(request)){
+            if(updateUser(request)){
                 request.getSession().setAttribute("currentUser", request.getParameter("username"));
                 response.sendRedirect("/webapp1/jsp/profileUsu.jsp");
             }
             response.setStatus(HttpServletResponse.SC_OK);
             
         } 
-        catch (UserAlreadyExistsException e) {
+        catch (UserDontExistsException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            System.err.println("User already exists");
+            System.err.println("User don't exists");
         }
         catch (Exception e)
         {
@@ -62,15 +64,17 @@ public class servletUsuarios extends HttpServlet {
         return preparedStatement.executeQuery().next();
     }
     
-    private boolean createNewUser(HttpServletRequest request) throws UserAlreadyExistsException, MalformedURLException, SQLException, ClassNotFoundException {
-        if (!exists(request.getParameter("username"))) {
-            
+    private boolean updateUser(HttpServletRequest request) throws  MalformedURLException, SQLException, ClassNotFoundException, UserDontExistsException {
+        String currentUsername = request.getSession().getAttribute("currentUser").toString();
+        if (exists(currentUsername)) {
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(USERID) as USERID FROM USERS");
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT USERID, PHOTO FROM USERS WHERE username = ?");
+            preparedStatement.setString(1, currentUsername);
             ResultSet r = preparedStatement.executeQuery();
             r.next();
-            Integer userId = r.getInt("USERID")+1;
-            
+            Integer userId = r.getInt("USERID");
+            String photo = r.getString("PHOTO");
+ 
             Usuario newUser = new Usuario(
                     userId,
                     request.getParameter("username"),
@@ -80,15 +84,14 @@ public class servletUsuarios extends HttpServlet {
                     request.getParameter("email"),
                     parseInt(request.getParameter("age")),
                     request.getParameter("description"),
-                    request.getParameter("photo").isEmpty() ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" : request.getParameter("photo")
-
+                    request.getParameter("photo").isEmpty() ? photo : request.getParameter("photo")
             );
-            
-            return newUser.storeUserInDb();
+
+            return newUser.updateUserInDb(userId);
         } 
         else 
         {
-            throw new UserAlreadyExistsException();
+            throw new UserDontExistsException();
         }
     }
 }

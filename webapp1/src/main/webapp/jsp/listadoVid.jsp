@@ -68,6 +68,11 @@
             </a>
             </br>
             </br>
+            <a href="profileUsu.jsp">
+                <button>Volver al perfil</button>
+            </a>
+            </br>
+            </br>
             <a href="/webapp1/">
                 <button>Cerrar sesión</button>
             </a>

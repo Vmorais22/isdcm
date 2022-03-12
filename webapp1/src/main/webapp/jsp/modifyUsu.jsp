@@ -1,5 +1,5 @@
 <%-- 
-    Document   : registerUsu
+    Document   : modifyUsu
     Created on : 20-feb-2022, 18:20:25
     Author     : defie
 --%>
@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Register user page</h1>
-        <form action="/webapp1/servletUsuarios" method="post">
+        <h1>Modify Profile </h1>
+        <form action="/webapp1/servletProfileModUsu" method="post">
             <br><input type="text" placeholder="Username" name="username" maxlength="16" /></br>
             <br><input type="password" id="txtPassword" placeholder="Contraseña" name="passwd" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres"/></br>
             <br><input type="password" id="txtConfirmPassword" placeholder="Repita contraseña" name="passwd2" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres"/></br>
@@ -41,6 +41,6 @@
     }
 </script>
         <br></br>
-        <a href="/webapp1/">Iniciar Sesión</a>
+        <a href="profileUsu.jsp">Volver</a>
     </body>
 </html>

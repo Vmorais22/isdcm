@@ -160,12 +160,9 @@ public class Usuario {
             {
                 if (r.getInt(1) == 0)
                     throw new UserDontExistsException();
-                else
-                    System.out.println("entro en el else");
-                    
+                else                    
                     result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"),r.getString("photo"));                
             }
-            System.out.println("9");
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
             System.out.println("error: "+e);
@@ -203,5 +200,28 @@ public class Usuario {
 
            return true;
 
+    }
+
+    public boolean updateUserInDb(int id) throws ClassNotFoundException, SQLException {
+           Class.forName("org.apache.derby.jdbc.ClientDriver");
+           String UPDATE_QUERY ="UPDATE USERS " 
+                   + "SET userId=?, username=?, realName=?, surname=?, password=?, email=?, age=?, description=?, photo=? " 
+                   + "WHERE userId=?";
+
+           Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+           PreparedStatement preparedStatement = c.prepareStatement(UPDATE_QUERY);
+           preparedStatement.setInt(10, id);
+           preparedStatement.setInt(1, this.getUserid());
+           preparedStatement.setString(2, this.getUserName());
+           preparedStatement.setString(3, this.getRealName());
+           preparedStatement.setString(4, this.getSurName());
+           preparedStatement.setString(5, this.getPassword());
+           preparedStatement.setString(6, this.getEmail());
+           preparedStatement.setInt(7, this.getAge());
+           preparedStatement.setString(8, this.getDescription());
+           preparedStatement.setString(9, this.getPhoto());
+           preparedStatement.executeUpdate();
+
+           return true;
     }
 }

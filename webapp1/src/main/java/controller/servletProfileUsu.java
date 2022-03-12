@@ -24,13 +24,8 @@ public class servletProfileUsu extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //response.sendRedirect(request.getContextPath() + "/profileUsu.jsp");
-        System.out.println("doPost servletProfileUsu");
-        
-        try (PrintWriter out = response.getWriter()) {
-            
-            String username = request.getParameter("user");
-            
+        try (PrintWriter out = response.getWriter()) {          
+            String username = request.getParameter("user");          
             request.setAttribute("dataProfile", new Usuario().getProfile(username));
         }
     }

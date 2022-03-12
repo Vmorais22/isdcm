@@ -71,6 +71,11 @@
             </a>
             </br>
             </br>
+            <a href="modifyUsu.jsp">
+                <button>Modificar perfil</button>
+            </a>
+            </br>
+            </br>
             <a href="/webapp1/
                ">
                 <button>Cerrar sesión</button>
