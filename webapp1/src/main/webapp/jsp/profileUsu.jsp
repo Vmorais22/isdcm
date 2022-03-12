@@ -38,6 +38,7 @@
         <div>
             <table>
                 <tr>
+                    <th>Photo<th>
                     <th>Id</th>
                     <th>Username</th>
                     <th>Nombre</th>
@@ -47,6 +48,7 @@
                     <th>Descripción</th>
                 </tr>
                 <tr>
+                     <td><img src=<%= r.getString("photo")%> alt="pic" width="90" height="100" /></td>
                     <td><%= r.getString("userId") %></td>
                     <td><%= r.getString("username") %></td>
                     <td><%= r.getString("realName") %></td>

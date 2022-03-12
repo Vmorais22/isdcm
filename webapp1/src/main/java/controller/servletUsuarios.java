@@ -81,9 +81,9 @@ public class servletUsuarios extends HttpServlet {
                     request.getParameter("passwd"),
                     request.getParameter("email"),
                     parseInt(request.getParameter("age")),
-                    request.getParameter("description")
-                    //,
-                    //new URL(request.getParameter("photo"))
+                    request.getParameter("description"),
+                    request.getParameter("photo").isEmpty() ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" : request.getParameter("photo")
+
             );
             
             return newUser.storeUserInDb();

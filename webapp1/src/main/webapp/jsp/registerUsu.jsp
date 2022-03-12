@@ -22,6 +22,7 @@
             <br><input type="email" placeholder="Email" name="email" maxlength="50"/></br>
             <br><input type="number" placeholder="Edad" name="age" min="12" max="100"/></br>
             <br><input type="text" placeholder="Descripción" name="description" maxlength="200"/></br>
+            <br><input type="url" placeholder="(Opcional) Url foto perfil" name="photo" pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png)"/></br>
             <br></br>
             <br><input type="submit" value="Enviar"/></br>
         </form>
