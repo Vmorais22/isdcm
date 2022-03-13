@@ -10,6 +10,7 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="model.Usuario"%>
 <%@page import="java.util.Objects"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <% 
@@ -36,51 +37,38 @@
         <center> <a href="registroVid.jsp"><button type="button">Modificar perfil</button></a> </center>
         --> 
         <div>
-            <table>
-                <tr>
-                    <th>Photo<th>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Edad</th>
-                    <th>Descripción</th>
-                </tr>
-                <tr>
-                     <td><img src=<%= r.getString("photo")%> alt="pic" width="90" height="100" /></td>
-                    <td><%= r.getString("userId") %></td>
-                    <td><%= r.getString("username") %></td>
-                    <td><%= r.getString("realName") %></td>
-                    <td><%= r.getString("surname") %></td>
-                    <td><%= r.getString("email") %></td>
-                    <td><%= r.getString("age") %></td>
-                    <td><%= r.getString("description") %></td>
-                </tr>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><%= r.getString("userId") %></th>
+                        <td><img src=<%= r.getString("photo")%> alt="pic" width="90" height="100"></td>
+                        <td><%= r.getString("username") %></td>
+                        <td><%= r.getString("realName") %></td>
+                        <td><%= r.getString("surname") %></td>
+                        <td><%= r.getString("email") %></td>
+                        <td><%= r.getString("age") %></td>
+                        <td><%= r.getString("description") %></td>
+                    </tr>
+                </tbody>
             </table>
-        </div>
-        <br></br>        
+        </div>       
         <div class="user">
-            <a href="listadoVid.jsp">
-                <button>Listado de vídeos</button>
-            </a>
-            </br>
-            </br>
-            <a href="registerVid.jsp">
-                <button>Subir nuevo vídeo</button>
-            </a>
-            </br>
-            </br>
-            <a href="modifyUsu.jsp">
-                <button>Modificar perfil</button>
-            </a>
-            </br>
-            </br>
-            <a href="/webapp1/
-               ">
-                <button>Cerrar sesión</button>
-            </a>
+            <a href="listadoVid.jsp" class="btn btn-primary">Listado de vídeos</a>
+            <a href="registerVid.jsp" class="btn btn-primary">Subir nuevo vídeo</a>
+            <a href="modifyUsu.jsp" class="btn btn-primary">Modificar perfil</a>
+            <a href="/webapp1/" class="btn btn-danger">Cerrar sesión</a>
         </div>
-        <!--<center> <button type="button" action="/webapp1/servletListadoVid" method="get">Mis videos</button></a> </center>    -->
-    </body>
+        </body>
 </html>

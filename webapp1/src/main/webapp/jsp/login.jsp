@@ -40,7 +40,7 @@
            </div>
 
            <button type="submit" class="btn btn-primary">Enviar</button>
-           <a href="jsp/registerUsu.jsp">¿No estás registrado?</a>
+           <a href="jsp/registerUsu.jsp" class="btn btn-link">¿No estás registrado?</a>
           </form>
          </div>
         </div>

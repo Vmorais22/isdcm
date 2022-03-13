@@ -12,6 +12,7 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="model.Usuario"%>
 <%@page import="java.util.Objects"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <% 
@@ -31,51 +32,43 @@
     <body>
         <h1>Listado de vídeos</h1>
         <div>
-            <table>
-                <tr>
-                    <th>Miniatura</th>
-                    <th>Id</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Fecha de creación</th>
-                    <th>Duración</th>
-                    <th>Vistas</th>
-                    <th>Descripción</th>
-                    <th>Formato</th>
-                    <th>Video</th>
-                </tr>
-                <% while(r.next()) { %>   
-                <tr>
-                    <td><img src=<%= r.getString("miniature")%> alt="pic" width="100" height="50" /></td>
-                    <td><%= r.getString("videoId") %></td>
-                    <td><%= r.getString("title") %></td>
-                    <td><%= r.getString("author") %></td>
-                    <td><%= r.getString("creationDate") %></td>
-                    <td><%= r.getString("duration") %></td>
-                    <td><%= r.getString("views") %></td>
-                    <td><%= r.getString("description") %></td>
-                    <td><%= r.getString("format") %></td>
-                    <td><%= r.getString("url") %></td>
-
-                </tr>
-                <% } %>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Miniatura</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col">Duración</th>
+                        <th scope="col">Vistas</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Formato</th>
+                        <th scope="col">Video</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% while(r.next()) { %>   
+                    <tr>
+                        <th scope="row"><%= r.getString("videoId") %></th>
+                        <td><img src=<%= r.getString("miniature")%> alt="pic" width="100" height="50" /></td>
+                        <td><%= r.getString("title") %></td>
+                        <td><%= r.getString("author") %></td>
+                        <td><%= r.getString("creationDate") %></td>
+                        <td><%= r.getString("duration") %></td>
+                        <td><%= r.getString("views") %></td>
+                        <td><%= r.getString("description") %></td>
+                        <td><%= r.getString("format") %></td>
+                        <td><%= r.getString("url") %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
             </table>
         </div>
         <br></br>        
         <div class="user">
-            <a href="registerVid.jsp">
-                <button>Subir nuevo video</button>
-            </a>
-            </br>
-            </br>
-            <a href="profileUsu.jsp">
-                <button>Volver al perfil</button>
-            </a>
-            </br>
-            </br>
-            <a href="/webapp1/">
-                <button>Cerrar sesión</button>
-            </a>
+            <a href="registerVid.jsp" class="btn btn-primary">Subir nuevo video</a>
+            <a href="profileUsu.jsp" class="btn btn-secondary">Volver al perfil</a>
         </div>
     </body>
 </html>

@@ -47,5 +47,5 @@ VALUES (1,'Uriel27','Uriel','Andrango','123','uriel@hotmail.com',22,'No español
 INSERT INTO users (userID, username, realName, surname, password, email, age, description)
 VALUES (2,'AdriByte','Adri','Alv','1234','adri@hotmail.com',22,'UWU');
 
-INSERT INTO videos (videoId, title, author, creationDate, duration, views, description, format)
+INSERT INTO videos (videoId, title, author, creationDate, duration, views, description, format, url, miniature)
 VALUES (1,'Trailer Spiderman No way Home','Marvel', '2015-12-17','13:30',3000,'No me quiero ir Sr Stark :(','mp4','url del video', 'https://as01.epimg.net/meristation/imagenes/2021/12/16/reportajes/1639644481_655591_1640209353_noticia_normal.jpg' );
