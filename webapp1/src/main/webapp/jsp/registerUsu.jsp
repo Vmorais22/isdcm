@@ -10,43 +10,42 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>WebApp1 - Registro de Usuario</title>
         <link rel="stylesheet" href="/webapp1/css/style.css" >
     </head>
     <body>
         <div class="container">
-            <h1>Register user page</h1>
+            <h1>Registro de Usuario</h1>
             <div class="card">
                 <div class="card-body">
                     <form action="/webapp1/servletUsuarios" method="post">
                         <div class=" form-group row">
-                        <label for="lastName" class="col-sm-2 col-form-label">User
-                         Name</label>
+                        <label for="lastName" class="col-sm-2 col-form-label">Nombre de usuario</label>
                         <div class="col-sm-7">
                          <input type="text" class="form-control" name="username"
-                          placeholder="Username" maxlength="16">
+                          placeholder="Nombre de usuario" maxlength="16">
                         </div>
                        </div>
                         <div class=" form-group row">
-                        <label for="lastName" class="col-sm-2 col-form-label">Password</label>
+                        <label for="lastName" class="col-sm-2 col-form-label">Contraseña</label>
                         <div class="col-sm-7">
                          <input class="form-control" type="pasword" id="txtPassword" placeholder="Contraseña" name="passwd" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres">
                         </div>
                        </div>
                         <div class=" form-group row">
-                        <label for="lastName" class="col-sm-2 col-form-label">Confirm password</label>
+                        <label for="lastName" class="col-sm-2 col-form-label">Confirmación de la Contraseña</label>
                         <div class="col-sm-7">
                          <input class="form-control" type="password" id="txtConfirmPassword" placeholder="Repita contraseña" name="passwd2" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres">
                         </div>
                        </div>
                         <div class=" form-group row">
-                        <label for="lastName" class="col-sm-2 col-form-label">Name</label>
+                        <label for="lastName" class="col-sm-2 col-form-label">Nombre</label>
                         <div class="col-sm-7">
                          <input class="form-control" type="text" placeholder="Nombre" name="realName" maxlength="20">
                         </div>
                        </div>
                         <div class=" form-group row">
-                        <label for="lastName" class="col-sm-2 col-form-label">Surname</label>
+                        <label for="lastName" class="col-sm-2 col-form-label">Apellido</label>
                         <div class="col-sm-7">
                          <input class="form-control" type="text" placeholder="Apellido" name="surName"maxlength="20">
                         </div>
@@ -58,19 +57,19 @@
                         </div>
                        </div>
                         <div class=" form-group row">
-                        <label for="lastName" class="col-sm-2 col-form-label">Age</label>
+                        <label for="lastName" class="col-sm-2 col-form-label">Edad</label>
                         <div class="col-sm-7">
                          <input class="form-control" type="number" placeholder="Edad" name="age" min="12" max="100">
                         </div>
                        </div>
                         <div class=" form-group row">
-                        <label for="lastName" class="col-sm-2 col-form-label">Description</label>
+                        <label for="lastName" class="col-sm-2 col-form-label">Descripción</label>
                         <div class="col-sm-7">
                          <input class="form-control" type="text" placeholder="Descripción" name="description" maxlength="200">
                         </div>
                        </div>
                         <div class=" form-group row">
-                        <label for="lastName" class="col-sm-2 col-form-label">Profile photo</label>
+                        <label for="lastName" class="col-sm-2 col-form-label">Foto de perfil</label>
                         <div class="col-sm-7">
                          <input class="form-control" type="url" placeholder="(Opcional) Url foto perfil" name="photo" pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png)">
                         </div>

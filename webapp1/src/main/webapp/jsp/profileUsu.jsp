@@ -26,23 +26,20 @@
 %>
 <html>
     <head>
-        <title>Perfil del usuario</title>
+        <title>WebApp1 - Perfil de <%= usuario %></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/webapp1/css/style.css" >
     </head>
     <body>
         <h1> Perfil de <%= usuario %> </h1>
-        <!--
-        <center> <a href="registroVid.jsp"><button type="button">Modificar perfil</button></a> </center>
-        --> 
         <div>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Photo</th>
-                        <th scope="col">Username</th>
+                        <th scope="col">Foto de Usuario</th>
+                        <th scope="col">Nombre de Usuario</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Email</th>

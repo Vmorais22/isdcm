@@ -24,7 +24,7 @@
 %>
 <html>
     <head>
-        <title>Listado de videos</title>
+        <title>WebApp1 - Listado de videos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/webapp1/css/style.css" >
@@ -68,7 +68,7 @@
         <br></br>        
         <div class="user">
             <a href="registerVid.jsp" class="btn btn-primary">Subir nuevo video</a>
-            <a href="profileUsu.jsp" class="btn btn-secondary">Volver al perfil</a>
+            <a href="profileUsu.jsp" class="btn btn-secondary">Volver</a>
         </div>
     </body>
 </html>

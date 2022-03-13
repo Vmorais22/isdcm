@@ -11,23 +11,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>WebApp1 - Iniciar Sesión</title>
         <link rel="stylesheet" href="/webapp1/css/style.css" >
     </head>
     <body>
     <div class="container">
         <br>
-        <h1>Login Page</h1>
+        <h1>Iniciar Sesión</h1>
         <div class="card">
          <div class="card-body">
           <form action="servletUsuarios" method="get">
 
            <div class=" form-group row">
-            <label for="lastName" class="col-sm-2 col-form-label">User
-             Name</label>
+            <label for="lastName" class="col-sm-2 col-form-label">Nombre de usuario</label>
             <div class="col-sm-7">
              <input type="text" class="form-control" name="username"
-              placeholder="Username">
+              placeholder="Nombre de usuario">
             </div>
            </div>
 
