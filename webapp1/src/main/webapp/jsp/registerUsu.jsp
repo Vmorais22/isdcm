@@ -29,7 +29,7 @@
                         <div class=" form-group row">
                         <label for="lastName" class="col-sm-2 col-form-label">Contraseña</label>
                         <div class="col-sm-7">
-                         <input class="form-control" type="pasword" id="txtPassword" placeholder="Contraseña" name="passwd" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres">
+                         <input class="form-control" type="password" id="txtPassword" placeholder="Contraseña" name="passwd" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres">
                         </div>
                        </div>
                         <div class=" form-group row">
