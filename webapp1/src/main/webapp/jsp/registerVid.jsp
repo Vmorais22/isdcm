@@ -38,6 +38,12 @@
                             </div>
                         </div>
                         <div class=" form-group row">
+                            <label for="lastName" class="col-sm-2 col-form-label">URL Video</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="url" placeholder="URL Miniatura" name="url" pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
                             <label for="lastName" class="col-sm-2 col-form-label">URL Miniatura</label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="url" placeholder="URL Miniatura" name="miniature" pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png)">
