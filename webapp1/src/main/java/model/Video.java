@@ -121,6 +121,7 @@ public class Video {
 
         Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
 
+        
         PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
         preparedStatement.setInt(1, this.getVideoId());
         preparedStatement.setString(2, this.getTitle());
