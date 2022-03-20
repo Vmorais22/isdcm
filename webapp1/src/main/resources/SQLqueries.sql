@@ -34,8 +34,8 @@ create table videos (
     views        numeric         not null default 0,
     description  varchar(255)    not null,
     format       varchar(5)      not null,
-    url          varchar(300)    not null,
-    miniature    varchar(300)    not null
+    url          varchar(100)    not null,
+    miniature    varchar(100)    not null
     );
 
 alter table users add constraint age_between_range check (age >= 12 and age <= 100);
