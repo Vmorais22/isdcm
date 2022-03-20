@@ -184,6 +184,7 @@ public class Usuario {
            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
            Class.forName("org.apache.derby.jdbc.ClientDriver");
 
+           
            Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
            PreparedStatement preparedStatement = c.prepareStatement(INSERT_QUERY);
            preparedStatement.setInt(1, this.getUserid());
