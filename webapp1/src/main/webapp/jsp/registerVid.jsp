@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-16">
         <title>WebApp1 - Registro de Video</title>
         <link rel="stylesheet" href="/webapp1/css/style.css" >
     </head>
@@ -41,6 +41,12 @@
                             <label for="lastName" class="col-sm-2 col-form-label">URL Miniatura</label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="url" placeholder="URL Miniatura" name="miniature" pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)(.jpg|.png)">
+                            </div>
+                        </div>
+                        <div class=" form-group row">
+                            <label for="lastName" class="col-sm-2 col-form-label">URL Video</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="url" placeholder="URL Video" name="url" pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>

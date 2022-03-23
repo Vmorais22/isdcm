@@ -25,7 +25,7 @@
 <html>
     <head>
         <title>WebApp1 - Listado de videos</title>
-        <meta charset="UTF-8">
+        <meta charset="UTF-16">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/webapp1/css/style.css" >
     </head>
@@ -59,7 +59,14 @@
                         <td><%= r.getString("views") %></td>
                         <td><%= r.getString("description") %></td>
                         <td><%= r.getString("format") %></td>
-                        <td><%= r.getString("url") %></td>
+                        <!--<td><%= r.getString("url") %></td>-->
+                        <td>
+                            <form id="boardButton" action="visorVid.jsp">
+                                
+                                <input type="hidden" name="link_url" value=<%= r.getString("url") %>/>
+                                <button class="btn btn-primary">Reproducir</button>
+                            </form>
+                        </td>
                     </tr>
                     <% } %>
                 </tbody>

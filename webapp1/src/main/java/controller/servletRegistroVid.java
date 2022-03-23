@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import model.Video;
 import java.util.Random;
 
-@WebServlet(name = "servletListadoVid", urlPatterns = {"/servletListadoVid"})
+@WebServlet(name = "servletRegistroVid", urlPatterns = {"/servletRegistroVid"})
 public class servletRegistroVid extends HttpServlet {
 
     private static final String INSERT_QUERY = "INSERT INTO VIDEOS "
