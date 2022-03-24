@@ -86,7 +86,6 @@ public class servletProfileModUsu extends HttpServlet {
                     request.getParameter("description"),
                     request.getParameter("photo").isEmpty() ? photo : request.getParameter("photo")
             );
-
             return newUser.updateUserInDb(userId);
         } 
         else 

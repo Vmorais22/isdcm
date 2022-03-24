@@ -14,7 +14,7 @@
     </head>
     <body>  
        
-        <form action="resources/javaee8/getInfo" method="get">
+        <form action="/webapp1/servletREST" method="get">
             <label>Título</label>
             <input type="text" name="titulo"/>
             <label>Autor</label>

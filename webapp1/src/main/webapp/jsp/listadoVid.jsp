@@ -61,9 +61,15 @@
                         <td><%= r.getString("format") %></td>
                         <!--<td><%= r.getString("url") %></td>-->
                         <td>
-                            <form id="boardButton" action="visorVid.jsp">
-                                
+                            <!--<form id="boardButton" action="visorVid.jsp">-->
+                             <form id="boardButton" action="/webapp1/servletREST" method="post">   
                                 <input type="hidden" name="link_url" value=<%= r.getString("url") %>/>
+                                <input type="hidden" name="currentVideoId" value=<%= r.getString("videoId") %>/>
+                                <input type="hidden" name="currentVideoTitle" value=<%= r.getString("title") %>/>
+                                <input type="hidden" name="currentVideoAuthor" value=<%= r.getString("author") %>/>
+                                <input type="hidden" name="currentVideoDescription" value=<%= r.getString("description") %>/>
+                                <input type="hidden" name="currentVideoViews" value=<%= r.getString("views") %>/>
+                                
                                 <button class="btn btn-primary">Reproducir</button>
                             </form>
                         </td>
