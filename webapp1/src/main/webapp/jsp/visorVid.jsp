@@ -2,6 +2,7 @@
 
 <%
     String currentLink = request.getSession().getAttribute("currentLink").toString();
+    currentLink = currentLink.substring(0, currentLink.length() - 1);
     String title = request.getSession().getAttribute("currentVideoTitle").toString();
     String author = request.getSession().getAttribute("currentVideoAuthor").toString();
     String description = request.getSession().getAttribute("currentVideoDescription").toString();
@@ -17,6 +18,7 @@
     <h1>Por: <%= author %> </h1>
     <h1><%= description %> </h1>
     <h1>Visto: <%= views %> </h1>
+    <h1><%= currentLink %> </h1>
   <video
     id="vid1"
     class="video-js vjs-default-skin vjs-big-play-centered"
