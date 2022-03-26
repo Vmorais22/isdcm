@@ -4,6 +4,7 @@
     Author     : defie
 --%>
 
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Video"%>
 <%@page import="java.sql.DriverManager"%>
@@ -16,7 +17,6 @@
 <!DOCTYPE html>
 
 <% 
-    // String usuario = (String) session.getAttribute("currentUser");
     String usuario = request.getSession().getAttribute("currentUser").toString();
     Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
     PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM VIDEOS ORDER BY creationDate DESC");
@@ -65,9 +65,9 @@
                              <form id="boardButton" action="/webapp1/servletREST" method="post">   
                                 <input type="hidden" name="link_url" value=<%= r.getString("url") %>/>
                                 <input type="hidden" name="currentVideoId" value=<%= r.getString("videoId") %>/>
-                                <input type="hidden" name="currentVideoTitle" value=<%= r.getString("title") %>/>
-                                <input type="hidden" name="currentVideoAuthor" value=<%= r.getString("author") %>/>
-                                <input type="hidden" name="currentVideoDescription" value=<%= r.getString("description") %>/>
+                                <input type="hidden" name="currentVideoTitle" value=<%= URLEncoder.encode(r.getString("title")) %>/>
+                                <input type="hidden" name="currentVideoAuthor" value=<%= URLEncoder.encode(r.getString("author")) %>/>
+                                <input type="hidden" name="currentVideoDescription" value=<%= URLEncoder.encode(r.getString("description")) %>/>
                                 <input type="hidden" name="currentVideoViews" value=<%= r.getString("views") %>/>
                                 
                                 <button class="btn btn-primary">Reproducir</button>

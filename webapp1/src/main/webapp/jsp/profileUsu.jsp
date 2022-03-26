@@ -15,6 +15,7 @@
 
 <% 
     // String usuario = (String) session.getAttribute("currentUser");
+    request.getSession().setAttribute("videoSearch", null);
     String usuario = request.getSession().getAttribute("currentUser").toString();
     Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
     PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM USERS WHERE username=?");
@@ -63,6 +64,7 @@
         </div>       
         <div class="user">
             <a href="listadoVid.jsp" class="btn btn-primary">Listado de vídeos</a>
+            <a href="busqueda.jsp" class="btn btn-primary">Buscar vídeos</a>
             <a href="registerVid.jsp" class="btn btn-primary">Subir nuevo vídeo</a>
             <a href="modifyUsu.jsp" class="btn btn-primary">Modificar perfil</a>
             <a href="/webapp1/" class="btn btn-danger">Cerrar sesión</a>

@@ -33,9 +33,9 @@ create table videos (
     duration     time            not null,
     views        numeric         not null default 0,
     description  varchar(255)    not null,
-    format       varchar(5)      not null,
-    url          varchar(100)    not null,
-    miniature    varchar(100)    not null
+    format       varchar(10)      not null,
+    url          varchar(500)    not null,
+    miniature    varchar(500)    not null
     );
 
 alter table users add constraint age_between_range check (age >= 12 and age <= 100);
@@ -48,4 +48,4 @@ INSERT INTO users (userID, username, realName, surname, password, email, age, de
 VALUES (2,'AdriByte','Adri','Alv','1234','adri@hotmail.com',22,'UWU');
 
 INSERT INTO videos (videoId, title, author, creationDate, duration, views, description, format, url, miniature)
-VALUES (1,'Trailer Spiderman No way Home','Marvel', '2015-12-17','13:30',3000,'No me quiero ir Sr Stark :(','mp4','url del video', 'https://as01.epimg.net/meristation/imagenes/2021/12/16/reportajes/1639644481_655591_1640209353_noticia_normal.jpg' );
+VALUES (1,'Trailer Spiderman No way Home','Marvel', '2015-12-17','13:30',3000,'No me quiero ir Sr Stark :(','mp4','https://www.youtube.com/watch?v=SkmRT3M4Vx4&ab_channel=SonyPicturesEspa%C3%B1a', 'https://as01.epimg.net/meristation/imagenes/2021/12/16/reportajes/1639644481_655591_1640209353_noticia_normal.jpg' );

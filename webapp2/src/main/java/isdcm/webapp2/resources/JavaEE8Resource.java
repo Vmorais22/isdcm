@@ -1,6 +1,10 @@
 package isdcm.webapp2.resources;
 
+import com.google.gson.Gson;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -20,17 +24,48 @@ public class JavaEE8Resource {
    
     /**
      * Sample of GET method
-     * @param id
+     * @param titulo
+     * @param autor
+     * @param fecha
      * @return
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.sql.SQLException
      */
     @Path("getInfo")
     @GET    
     @Produces("text/html")
-    public String getInfo (@QueryParam("id") String id) throws ClassNotFoundException, SQLException {
-        new Video().updateVideoById(Integer.parseInt(id));
-        return "<html><head></head> <body> Titulo: " + id + "</body></html>";
+    public String getInfo (@QueryParam("titulo") String titulo, @QueryParam("autor") String autor, @QueryParam("fecha") String fecha ) {
+
+        try
+        {
+           ResultSet result = new Video().searchVideosBy(titulo,autor,fecha);
+           
+           if(result != null) {
+               List<Video> videosFound = new ArrayList<>();                
+               while(result.next()){
+                   Video video = new Video( result.getInt("videoId"),
+                                            result.getString("title"),
+                                            result.getString("author"),
+                                            result.getString("creationDate"),
+                                            result.getString("duration"),
+                                            result.getInt("views"),
+                                            result.getString("description"),
+                                            result.getString("format"),
+                                            result.getString("url"),
+                                            result.getString("miniature"));
+                   videosFound.add(video); 
+               }
+               
+               Gson gson = new Gson();  
+               String body = gson.toJson(videosFound);  
+               return body;
+           }
+           else {
+               return null;
+           }
+        }
+        catch(ClassNotFoundException | SQLException e){
+            System.err.print("errorcito al canto causado por: " + e);
+        } 
+        return null;
     }
    
     /**
@@ -62,14 +97,12 @@ public class JavaEE8Resource {
     @Produces("text/html")
     public String putInfo (@QueryParam("id") String id) 
     {    
-        System.out.print("entro en el putInfo con id:" + id);
         try
         {
            String videoId = id.substring(0,id.length()-1);
            new Video().updateVideoById(Integer.parseInt(videoId)); 
         }
         catch(ClassNotFoundException | NumberFormatException | SQLException e){
-            System.err.print("errorcito al canto causado por: " + e);
         }
         
         return "<html><head></head> <body> Informaci&oacute;n recibida " + id + " en fecha " + id + " </body></html>";

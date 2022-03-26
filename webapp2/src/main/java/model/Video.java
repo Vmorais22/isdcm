@@ -3,6 +3,7 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Video {
@@ -121,5 +122,22 @@ public class Video {
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
     }
-    
+
+    public ResultSet searchVideosBy(String titulo, String autor, String fecha) throws ClassNotFoundException, SQLException {
+        if(titulo == null && autor == null && fecha == null) return null;
+        
+        Class.forName("org.apache.derby.jdbc.ClientDriver"); 
+        String SELECT_QUERY ="SELECT * " 
+       + "FROM VIDEOS " 
+       + "WHERE (title LIKE ?) " 
+       + "OR (author LIKE ? ) " 
+       + "OR (creationDate LIKE ?)";
+        
+        Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
+        PreparedStatement preparedStatement = c.prepareStatement(SELECT_QUERY);
+        preparedStatement.setString(1, titulo);
+        preparedStatement.setString(2, autor);
+        preparedStatement.setString(3, fecha);
+        return preparedStatement.executeQuery();
+    }   
 }
