@@ -29,7 +29,9 @@ create table videos (
     videoId      numeric         primary key,
     title        varchar(100)    not null,
     author       varchar(100)    not null,
-    creationDate varchar(100)    not null,
+    creationYear numeric    not null,
+    creationMonth numeric    not null,
+    creationDay numeric    not null,
     duration     time            not null,
     views        numeric         not null default 0,
     description  varchar(255)    not null,
@@ -47,5 +49,5 @@ VALUES (1,'Uriel27','Uriel','Andrango','123','uriel@hotmail.com',22,'No español
 INSERT INTO users (userID, username, realName, surname, password, email, age, description)
 VALUES (2,'AdriByte','Adri','Alv','1234','adri@hotmail.com',22,'UWU');
 
-INSERT INTO videos (videoId, title, author, creationDate, duration, views, description, format, url, miniature)
-VALUES (1,'Trailer Spiderman No way Home','Marvel', '2015-12-17','13:30',3000,'No me quiero ir Sr Stark :(','mp4','https://www.youtube.com/watch?v=SkmRT3M4Vx4&ab_channel=SonyPicturesEspa%C3%B1a', 'https://as01.epimg.net/meristation/imagenes/2021/12/16/reportajes/1639644481_655591_1640209353_noticia_normal.jpg' );
+INSERT INTO videos (videoId, title, author, creationYear, creationMonth, creationDay, duration, views, description, format, url, miniature)
+VALUES (1,'Trailer Spiderman No way Home','Marvel', 2021, 12, 17, '13:30',3000,'No me quiero ir Sr Stark :(','mp4','https://www.youtube.com/watch?v=SkmRT3M4Vx4&ab_channel=SonyPicturesEspa%C3%B1a', 'https://as01.epimg.net/meristation/imagenes/2021/12/16/reportajes/1639644481_655591_1640209353_noticia_normal.jpg' );

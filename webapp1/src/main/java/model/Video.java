@@ -11,7 +11,9 @@ public class Video {
     private int videoId;
     private String title;
     private String author;
-    private String creationDate;
+    private int creationYear;
+    private int creationMonth;
+    private int creationDay;
     private String duration;
     private int views;
     private String description;
@@ -19,11 +21,13 @@ public class Video {
     private String url;
     private String miniature;
 
-    public Video(int videoId, String title, String author, String creationDate, String duration, int views, String description, String format, String url, String miniature) {
+    public Video(int videoId, String title, String author, int creationYear, int creationMonth, int creationDay, String duration, int views, String description, String format, String url, String miniature) {
         this.videoId = videoId;
         this.title = title;
         this.author = author;
-        this.creationDate = creationDate;
+        this.creationYear = creationYear;
+        this.creationMonth = creationMonth;
+        this.creationDay = creationDay;
         this.duration = duration;
         this.views = views;
         this.description = description;
@@ -56,12 +60,29 @@ public class Video {
         this.author = author;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+       public int getCreationYear() {
+        return creationYear;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationYear(int creationYear) {
+        this.creationYear = creationYear;
+    }
+    
+    public int getCreationMonth() {
+        return creationMonth;
+    }
+
+    public void setCreationMonth(int creationMonth) {
+        this.creationMonth = creationMonth;
+    }
+
+    
+    public int getCreationDay() {
+        return creationDay;
+    }
+
+    public void setCreationDay(Integer creationDay) {
+        this.creationDay = creationDay;
     }
 
     public String getDuration() {
@@ -114,10 +135,13 @@ public class Video {
     public boolean storeVideoInDb() throws ClassNotFoundException, SQLException {
 
         Date sqlDate = new Date(System.currentTimeMillis());
-        
+
+            int year = Integer.parseInt(sqlDate.toString().substring(0 , 4));
+            int month = Integer.parseInt(sqlDate.toString().substring(5 , 7));
+            int day = Integer.parseInt(sqlDate.toString().substring(8 , 10));
         String INSERT_QUERY = "INSERT INTO VIDEOS "
-            + "(videoId, title, author, creationDate, duration, views, description, format, url, miniature) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "(videoId, title, author, creationYear, creationMonth, creationDay, duration, views, description, format, url, miniature) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
 
@@ -125,15 +149,16 @@ public class Video {
         preparedStatement.setInt(1, this.getVideoId());
         preparedStatement.setString(2, this.getTitle());
         preparedStatement.setString(3, this.getAuthor());
-        preparedStatement.setString(4, sqlDate.toString());
-        preparedStatement.setString(5, this.getDuration());
-        preparedStatement.setInt(6,  this.getViews()); //new videos always will have 0 views when created
-        preparedStatement.setString(7, this.getDescription());
-        preparedStatement.setString(8, this.getFormat());
-        preparedStatement.setString(9, this.getUrl());
-        preparedStatement.setString(10, this.getMiniature());
+        preparedStatement.setInt(4, year);
+        preparedStatement.setInt(5, month);
+        preparedStatement.setInt(6, day);
+        preparedStatement.setString(7, this.getDuration());
+        preparedStatement.setInt(8,  this.getViews()); //new videos always will have 0 views when created
+        preparedStatement.setString(9, this.getDescription());
+        preparedStatement.setString(10, this.getFormat());
+        preparedStatement.setString(11, this.getUrl());
+        preparedStatement.setString(12, this.getMiniature());
         preparedStatement.executeUpdate();
         return true;
-
     }
 }

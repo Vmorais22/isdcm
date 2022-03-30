@@ -36,8 +36,10 @@ public class servletREST extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String titulo = request.getParameter("titulo");
         String autor = request.getParameter("autor");
-        String fecha = request.getParameter("fecha");
-        URL url = new URL(BASE_URL + "/getInfo?titulo="+URLEncoder.encode(titulo)+"&autor="+URLEncoder.encode(autor)+"&fecha="+fecha); 
+        String año = request.getParameter("year");
+        String mes = request.getParameter("month");
+        String dia = request.getParameter("day");
+        URL url = new URL(BASE_URL + "/getInfo?titulo="+URLEncoder.encode(titulo)+"&autor="+URLEncoder.encode(autor)+"&año="+año+"&mes="+mes+"&dia="+dia); 
         
         HttpURLConnection con = (HttpURLConnection) url.openConnection(); 
         con.setRequestMethod("GET");

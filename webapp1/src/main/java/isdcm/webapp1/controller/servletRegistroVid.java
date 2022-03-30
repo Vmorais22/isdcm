@@ -75,7 +75,9 @@ public class servletRegistroVid extends HttpServlet {
                     videoId,
                     request.getParameter("title"),
                     request.getSession().getAttribute("currentUser").toString(),//tendria que ser el username del perfil 
-                    "",
+                    0,
+                    0,
+                    0,
                     duracionHours+":"+duracionMinutes+":"+duracionSeconds,
                     0,
                     request.getParameter("description"),

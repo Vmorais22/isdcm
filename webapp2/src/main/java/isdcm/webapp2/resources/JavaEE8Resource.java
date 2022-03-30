@@ -26,17 +26,19 @@ public class JavaEE8Resource {
      * Sample of GET method
      * @param titulo
      * @param autor
-     * @param fecha
+     * @param año
+     * @param mes
+     * @param dia
      * @return
      */
     @Path("getInfo")
     @GET    
     @Produces("text/html")
-    public String getInfo (@QueryParam("titulo") String titulo, @QueryParam("autor") String autor, @QueryParam("fecha") String fecha ) {
+    public String getInfo (@QueryParam("titulo") String titulo, @QueryParam("autor") String autor, @QueryParam("año") String año, @QueryParam("mes") String mes, @QueryParam("dia") String dia ) {
 
         try
         {
-           ResultSet result = new Video().searchVideosBy(titulo,autor,fecha);
+           ResultSet result = new Video().searchVideosBy(titulo,autor,año,mes,dia);
            
            if(result != null) {
                List<Video> videosFound = new ArrayList<>();                
@@ -44,7 +46,9 @@ public class JavaEE8Resource {
                    Video video = new Video( result.getInt("videoId"),
                                             result.getString("title"),
                                             result.getString("author"),
-                                            result.getString("creationDate"),
+                                            result.getInt("creationYear"),
+                                            result.getInt("creationMonth"),
+                                            result.getInt("creationDay"),
                                             result.getString("duration"),
                                             result.getInt("views"),
                                             result.getString("description"),

@@ -19,7 +19,7 @@
 <% 
     String usuario = request.getSession().getAttribute("currentUser").toString();
     Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
-    PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM VIDEOS ORDER BY creationDate DESC");
+    PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM VIDEOS ORDER BY creationYear, creationMonth, creationDay DESC");
     ResultSet r = preparedStatement.executeQuery();
 %>
 <html>
@@ -54,7 +54,7 @@
                         <td><img src=<%= r.getString("miniature")%> alt="pic" width="100" height="50" /></td>
                         <td><%= r.getString("title") %></td>
                         <td><%= r.getString("author") %></td>
-                        <td><%= r.getString("creationDate") %></td>
+                        <td><%= r.getInt("creationYear") + "-" + r.getInt("creationMonth") + "-" + r.getInt("creationDay")%></td>
                         <td><%= r.getString("duration") %></td>
                         <td><%= r.getString("views") %></td>
                         <td><%= r.getString("description") %></td>

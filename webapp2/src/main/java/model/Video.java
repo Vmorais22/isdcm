@@ -11,7 +11,9 @@ public class Video {
     private int videoId;
     private String title;
     private String author;
-    private String creationDate;
+    private int creationYear;
+    private int creationMonth;
+    private int creationDay;
     private String duration;
     private int views;
     private String description;
@@ -19,11 +21,13 @@ public class Video {
     private String url;
     private String miniature;
 
-    public Video(int videoId, String title, String author, String creationDate, String duration, int views, String description, String format, String url, String miniature) {
+    public Video(int videoId, String title, String author, int creationYear, int creationMonth, int creationDay, String duration, int views, String description, String format, String url, String miniature) {
         this.videoId = videoId;
         this.title = title;
         this.author = author;
-        this.creationDate = creationDate;
+        this.creationYear = creationYear;
+        this.creationMonth = creationMonth;
+        this.creationDay = creationDay;
         this.duration = duration;
         this.views = views;
         this.description = description;
@@ -57,12 +61,29 @@ public class Video {
         this.author = author;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public int getCreationYear() {
+        return creationYear;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationYear(int creationYear) {
+        this.creationYear = creationYear;
+    }
+    
+    public int getCreationMonth() {
+        return creationMonth;
+    }
+
+    public void setCreationMonth(int creationMonth) {
+        this.creationMonth = creationMonth;
+    }
+
+    
+    public int getCreationDay() {
+        return creationDay;
+    }
+
+    public void setCreationDay(int creationDay) {
+        this.creationDay = creationDay;
     }
 
     public String getDuration() {
@@ -123,21 +144,27 @@ public class Video {
         preparedStatement.executeUpdate();
     }
 
-    public ResultSet searchVideosBy(String titulo, String autor, String fecha) throws ClassNotFoundException, SQLException {
-        if(titulo == null && autor == null && fecha == null) return null;
-        
+    public ResultSet searchVideosBy(String titulo, String autor, String año, String mes, String dia) throws ClassNotFoundException, SQLException {
+        if(titulo == null && autor == null && año == null && mes == null && dia == null) return null;
+        if("-".equals(año)) año = null;
+        if("-".equals(mes)) mes = null;
+        if("-".equals(dia)) dia = null;
         Class.forName("org.apache.derby.jdbc.ClientDriver"); 
         String SELECT_QUERY ="SELECT * " 
        + "FROM VIDEOS " 
-       + "WHERE (title LIKE ?) " 
-       + "OR (author LIKE ? ) " 
-       + "OR (creationDate LIKE ?)";
-        
+       + "WHERE (title = ?) " 
+       + "OR (author = ? ) " 
+       + "OR (creationYear = ?)"
+       + "OR (creationMonth = ?)"
+       + "OR (creationDay = ?)";
+
         Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
         PreparedStatement preparedStatement = c.prepareStatement(SELECT_QUERY);
         preparedStatement.setString(1, titulo);
         preparedStatement.setString(2, autor);
-        preparedStatement.setString(3, fecha);
+        preparedStatement.setInt(3, Integer.parseInt(año));
+        preparedStatement.setInt(4, Integer.parseInt(mes));
+        preparedStatement.setInt(5, Integer.parseInt(dia));
         return preparedStatement.executeQuery();
     }   
 }
