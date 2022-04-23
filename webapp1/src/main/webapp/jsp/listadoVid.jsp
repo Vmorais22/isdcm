@@ -51,15 +51,13 @@
                 </thead>
                 <tbody>
                     <% 
-                        if(request.getSession().getAttribute("listVideos") == null) {
-                            while(r.next()) {
+                        while(r.next()) {
                             listVideo.add(new Video(Integer.parseInt(r.getString("videoId")),r.getString("title"), r.getString("author"), r.getInt("creationYear"), r.getInt("creationMonth"), r.getInt("creationDay"), r.getString("duration"), Integer.parseInt(r.getString("views")), r.getString("description"), r.getString("format"), r.getString("url"), r.getString("miniature")));
-                            request.getSession().setAttribute("listVideos", listVideo);
-                            }
                         }
-                        else {
-                            listVideo = (ArrayList<Video>) request.getSession().getAttribute("listVideos");
-                        }
+                        if(request.getSession().getAttribute("listVideos") == null || listVideo.size() != ((ArrayList<Video>) request.getSession().getAttribute("listVideos")).size()) request.getSession().setAttribute("listVideos", listVideo);
+
+
+                        listVideo = (ArrayList<Video>) request.getSession().getAttribute("listVideos");
                         for(int i = 0; i < listVideo.size(); ++i) {
                         %>   
                     <tr>
