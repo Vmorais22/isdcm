@@ -20,6 +20,7 @@ public class Video {
     private String format;
     private String url;
     private String miniature;
+    private boolean encripted;
 
     public Video(int videoId, String title, String author, int creationYear, int creationMonth, int creationDay, String duration, int views, String description, String format, String url, String miniature) {
         this.videoId = videoId;
@@ -34,6 +35,7 @@ public class Video {
         this.format = format;
         this.url = url;
         this.miniature = miniature;
+        this.encripted = false;
     }
 
     public int getVideoId() {
@@ -131,6 +133,14 @@ public class Video {
 
     public void setMiniature(String miniature) {
         this.miniature = miniature;
+    }
+    
+    public boolean getEncripted() {
+        return this.encripted;
+    }
+
+    public void setEncripted(boolean encripted) {
+        this.encripted = encripted;
     }
     public boolean storeVideoInDb() throws ClassNotFoundException, SQLException {
 

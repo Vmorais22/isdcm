@@ -132,14 +132,13 @@ public class Usuario {
                     result = false;
             }          
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-            System.out.println("error: "+e);
+            System.err.println(e.getStackTrace());
         } finally {
             try {
                 if (c != null) 
                     c.close();                
             } catch (Exception e) {
-                System.out.println(e.getStackTrace());
+                System.err.println(e.getStackTrace());
             }
         }
         return result;                        
@@ -164,14 +163,13 @@ public class Usuario {
                     result = new Usuario(r.getInt("userId"),r.getString("username"),r.getString("realName"),r.getString("surname"),r.getString("password"),r.getString("email"),r.getInt("age"),r.getString("description"),r.getString("photo"));                
             }
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-            System.out.println("error: "+e);
+            System.err.println(e.getStackTrace());
         } finally {
             try {
                 if (c != null) 
                     c.close();                
             } catch (Exception e) {
-                System.out.println(e.getStackTrace());
+                System.err.println(e.getStackTrace());
             }
         }
         return result;

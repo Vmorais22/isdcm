@@ -34,7 +34,6 @@ public class servletRegistroVid extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("llego al do post");       
         
         try {
             if(createNewVideo(request)){
@@ -55,7 +54,6 @@ public class servletRegistroVid extends HttpServlet {
     }
 
     private boolean createNewVideo(HttpServletRequest request) throws VideoAlreadyExistsException, SQLException, ClassNotFoundException {
-        System.out.println("Entro en createNewVideo");       
         
             Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
             PreparedStatement preparedStatement = c.prepareStatement("SELECT MAX(VIDEOID) as VIDEOID FROM VIDEOS");

@@ -4,6 +4,7 @@
     Author     : defie
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Video"%>
@@ -21,6 +22,7 @@
     Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/pr2;user=pr2;password=pr2");
     PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM VIDEOS ORDER BY creationYear, creationMonth, creationDay DESC");
     ResultSet r = preparedStatement.executeQuery();
+    ArrayList<Video> listVideo = new ArrayList<Video>(); 
 %>
 <html>
     <head>
@@ -48,29 +50,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% while(r.next()) { %>   
+                    <% 
+                        if(request.getSession().getAttribute("listVideos") == null) {
+                            while(r.next()) {
+                            listVideo.add(new Video(Integer.parseInt(r.getString("videoId")),r.getString("title"), r.getString("author"), r.getInt("creationYear"), r.getInt("creationMonth"), r.getInt("creationDay"), r.getString("duration"), Integer.parseInt(r.getString("views")), r.getString("description"), r.getString("format"), r.getString("url"), r.getString("miniature")));
+                            request.getSession().setAttribute("listVideos", listVideo);
+                            }
+                        }
+                        else {
+                            listVideo = (ArrayList<Video>) request.getSession().getAttribute("listVideos");
+                        }
+                        for(int i = 0; i < listVideo.size(); ++i) {
+                        %>   
                     <tr>
-                        <th scope="row"><%= r.getString("videoId") %></th>
-                        <td><img src=<%= r.getString("miniature")%> alt="pic" width="100" height="50" /></td>
-                        <td><%= r.getString("title") %></td>
-                        <td><%= r.getString("author") %></td>
-                        <td><%= r.getInt("creationYear") + "-" + r.getInt("creationMonth") + "-" + r.getInt("creationDay")%></td>
-                        <td><%= r.getString("duration") %></td>
-                        <td><%= r.getString("views") %></td>
-                        <td><%= r.getString("description") %></td>
-                        <td><%= r.getString("format") %></td>
-                        <!--<td><%= r.getString("url") %></td>-->
+                        <th scope="row"><%= listVideo.get(i).getVideoId() %></th>
+                        <td><img src=<%= listVideo.get(i).getMiniature() %> alt="pic" width="100" height="50" /></td>
+                        <td><%= listVideo.get(i).getTitle() %></td>
+                        <td><%= listVideo.get(i).getAuthor() %></td>
+                        <td><%= listVideo.get(i).getCreationYear() + "-" + listVideo.get(i).getCreationMonth() + "-" + listVideo.get(i).getCreationDay()%></td>
+                        <td><%= listVideo.get(i).getDuration() %></td>
+                        <td><%= listVideo.get(i).getViews() %></td>
+                        <td><%= listVideo.get(i).getDescription() %></td>
+                        <td><%= listVideo.get(i).getFormat() %></td>
+                        <!--<td><%= listVideo.get(i).getUrl() %></td>-->
                         <td>
                             <!--<form id="boardButton" action="visorVid.jsp">-->
                              <form id="boardButton" action="/webapp1/servletREST" method="post">   
-                                <input type="hidden" name="link_url" value=<%= r.getString("url") %>/>
-                                <input type="hidden" name="currentVideoId" value=<%= r.getString("videoId") %>/>
-                                <input type="hidden" name="currentVideoTitle" value=<%= URLEncoder.encode(r.getString("title")) %>/>
-                                <input type="hidden" name="currentVideoAuthor" value=<%= URLEncoder.encode(r.getString("author")) %>/>
-                                <input type="hidden" name="currentVideoDescription" value=<%= URLEncoder.encode(r.getString("description")) %>/>
-                                <input type="hidden" name="currentVideoViews" value=<%= r.getString("views") %>/>
+                                <input type="hidden" name="link_url" value=<%= listVideo.get(i).getUrl() %>/>
+                                <input type="hidden" name="currentVideoId" value=<%= listVideo.get(i).getVideoId() %>/>
+                                <input type="hidden" name="currentVideoTitle" value=<%= URLEncoder.encode(listVideo.get(i).getTitle()) %>/>
+                                <input type="hidden" name="currentVideoAuthor" value=<%= URLEncoder.encode(listVideo.get(i).getAuthor()) %>/>
+                                <input type="hidden" name="currentVideoDescription" value=<%= URLEncoder.encode(listVideo.get(i).getDescription()) %>/>
+                                <input type="hidden" name="currentVideoViews" value=<%= listVideo.get(i).getViews() %>/>
                                 
                                 <button class="btn btn-primary">Reproducir</button>
+                            </form>
+                                </br>
+                                <form id="boardButton" action="/webapp1/servletEncription" method="get">   
+                                    <input type="hidden" name="vid" value=<%= i %>/>
+                                    <% if(!listVideo.get(i).getEncripted()) { %>
+                                        <button class="btn btn-danger">No encriptado</button>
+                                    <% } else { %>
+                                        <button class="btn btn-success">Encriptado</button>
+                                    <% } %>
                             </form>
                         </td>
                     </tr>

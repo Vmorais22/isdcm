@@ -84,16 +84,13 @@ public class servletREST extends HttpServlet {
         author = request.getParameter("currentVideoAuthor");
         description = request.getParameter("currentVideoDescription");
         views = request.getParameter("currentVideoViews");
-        System.out.println("obtenidos: " + title + " " + author + " " + description + " " + views );
-        
+   
         title = URLDecoder.decode(title.substring(0,title.length() - 1));
         author = URLDecoder.decode(author.substring(0,author.length() - 1));
         description = URLDecoder.decode(description.substring(0,description.length() - 1));
         Integer aux =Integer.parseInt(views.substring(0,views.length() - 1)) + 1;
         views = aux.toString();
-        
-        System.out.println("obtenidos: " + title + " " + author + " " + description + " " + views );
-        
+               
         request.getSession().setAttribute("currentVideoTitle", title);
         request.getSession().setAttribute("currentVideoAuthor", author);
         request.getSession().setAttribute("currentVideoDescription", description);
